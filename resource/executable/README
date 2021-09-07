@@ -1,0 +1,9 @@
+In order to launch custom mods with Zandronum:
+
+1. Run the applicable OS ./fetch-doom-{os}.sh script using MinGW bash or
+   equivalent.
+
+2. Copy two files into the ./generic/ sub-directory for the custom mod. Naming
+   must exactly match.
+  * generic/mod.ini
+  * generic/mod.pk3

@@ -71,3 +71,5 @@ Thumbs.db
 *.dll
 *.exe
 
+# Project specific exclusions
+resource/executable/*

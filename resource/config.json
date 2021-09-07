@@ -1,0 +1,13 @@
+{
+  "clientArguments": {
+    "+crouch": ""
+  },
+  "serverArguments": {
+    "-deathmatch": "",
+    "+addmap": "MULTI06",
+    "+addbot": [
+      "Ramsus",
+      "Ramsus"
+    ]
+  }
+}

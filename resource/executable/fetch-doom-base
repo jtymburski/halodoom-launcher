@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+#
+# These are the common definitions and functions for fetching
+# doom regardless of the operating system. It expects bash as
+# the minimum requirement.
+#
+
+GITHUB_REPOSITORY="jtymburski/zandronum-launcher"
+
+#
+# Download a GitHub release file from the repository for the latest tag.
+# Param $1: Regex to pull from GitHub API
+# Param $2: Output file path including the file name
+#
+download_from_github_api () {
+  REMOTE_FILE=`curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest" \
+    | grep 'browser_' \
+    | grep -E "$1" \
+    | cut -d\" -f4`
+
+  curl -L -o "$2" "$REMOTE_FILE"
+}
+
+#
+# Expects a local .tar.gz container that it will extract to a directory
+# before removing the compressed version.
+# Param $1: Local compressed file
+# Param $2: Output directory
+#
+extract_and_clean_up_asset() {
+  mkdir -p "$2"
+  tar zxf "$1" --directory "$2" --verbose
+  rm "$1" 2> /dev/null
+}
+
+# Doom IWAD Fetch
+
+echo "-- Downloading Doom IWAD --"
+
+DOOM_LOCAL_PATH="$SCRIPT_DIR/doom.tar.gz"
+download_from_github_api "freedm-[0-9.]*.tar.gz" "$DOOM_LOCAL_PATH"
+
+echo ""
+echo "-- Extracting Doom IWAD --"
+
+extract_and_clean_up_asset "$DOOM_LOCAL_PATH" "$SCRIPT_DIR/generic"
