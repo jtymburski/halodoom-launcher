@@ -15,7 +15,8 @@ SOURCES += \
     src/main.cpp \
     src/model/argument.cpp \
     src/network/networkinfo.cpp \
-    src/ui/maindialog.cpp
+    src/ui/maindialog.cpp \
+    src/ui/widget/animatedbackground.cpp
 
 HEADERS += \
     include/file/filereader.h \
@@ -27,7 +28,8 @@ HEADERS += \
     include/game/gamecontroller.h \
     include/model/argument.h \
     include/network/networkinfo.h \
-    include/ui/maindialog.h
+    include/ui/maindialog.h \
+    include/ui/widget/animatedbackground.h
 
 INCLUDEPATH += \
     include

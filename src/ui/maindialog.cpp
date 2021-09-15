@@ -1,7 +1,8 @@
 #include "ui/maindialog.h"
 
 /* Constant Implementation - see header file for descriptions */
-const QString MainDialog::kBACKGROUND_PATH = ":/resource/background.png";
+const QSize MainDialog::RESOLUTION_LARGE = QSize(1920, 1080);
+const QSize MainDialog::RESOLUTION_SMALL = QSize(1280, 720);
 
 MainDialog::MainDialog(QWidget *parent)
   : QDialog(parent)
@@ -10,17 +11,29 @@ MainDialog::MainDialog(QWidget *parent)
   setWindowFlags( Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint );
 
   // Fix the window size to the background
-  QImage background_image(kBACKGROUND_PATH);
-  setFixedSize(background_image.width(), background_image.height());
-  setObjectName("mainDialog");
-  setStyleSheet("QDialog#mainDialog {background-image: url(" + kBACKGROUND_PATH + ");}");
+  QScreen* primary_screen = QGuiApplication::primaryScreen();
+  if(primary_screen->geometry().width() > RESOLUTION_LARGE.width())
+    setFixedSize(RESOLUTION_LARGE);
+  else
+    setFixedSize(RESOLUTION_SMALL);
 
   QGridLayout* layout = new QGridLayout(this);
   layout->setRowStretch(0, 1);
   layout->setColumnStretch(0, 1);
-  layout->setMargin(25);
+  layout->setMargin(0);
+
+  // Animated background
+  AnimatedBackground* background = new AnimatedBackground(this);
+  background->addBackground(":/image/bg-main1.jpg");
+  background->addBackground(":/image/bg-main2.jpg");
+  background->addBackground(":/image/bg-main3.jpg");
+  background->addBackground(":/image/bg-main4.jpg");
+  background->addBackground(":/image/bg-main5.jpg");
+  background->addOverlay(":/image/halodoom.png");
+  layout->addWidget(background, 0, 0, -1, -1);
 
   QVBoxLayout* button_layout = new QVBoxLayout();
+  button_layout->setMargin(35);
 
   // Server label
   server_addr_label = new QLabel("", this);

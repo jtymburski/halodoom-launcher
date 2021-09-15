@@ -1,5 +1,11 @@
 <RCC>
-    <qresource prefix="/">
-        <file>resource/background.png</file>
+    <qresource prefix="image">
+        <file alias="bg-dither.png">resource/image/background/dither_fresnel.png</file>
+        <file alias="bg-main1.jpg">resource/image/background/main1.jpg</file>
+        <file alias="bg-main2.jpg">resource/image/background/main2.jpg</file>
+        <file alias="bg-main3.jpg">resource/image/background/main3.jpg</file>
+        <file alias="bg-main4.jpg">resource/image/background/main4.jpg</file>
+        <file alias="bg-main5.jpg">resource/image/background/main5.jpg</file>
+        <file alias="halodoom.png">resource/image/halodoom.png</file>
     </qresource>
 </RCC>

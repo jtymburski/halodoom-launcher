@@ -3,14 +3,17 @@
 
 #include <QDialog>
 #include <QGridLayout>
+#include <QGuiApplication>
 #include <QInputDialog>
 #include <QLabel>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QScreen>
 #include <QTimer>
 
 #include "game/gamecontroller.h"
 #include "network/networkinfo.h"
+#include "ui/widget/animatedbackground.h"
 
 class MainDialog : public QDialog
 {
@@ -34,8 +37,9 @@ private:
   QLabel* server_addr_label;
   QPushButton* server_button;
 
-  /* Background image resource path */
-  const static QString kBACKGROUND_PATH;
+  /* Resolution options */
+  const static QSize RESOLUTION_LARGE;
+  const static QSize RESOLUTION_SMALL;
 
 private slots:
   /* Client button click */
