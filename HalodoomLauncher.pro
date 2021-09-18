@@ -16,7 +16,9 @@ SOURCES += \
     src/model/argument.cpp \
     src/network/networkinfo.cpp \
     src/ui/maindialog.cpp \
-    src/ui/widget/animatedbackground.cpp
+    src/ui/view/mainview.cpp \
+    src/ui/widget/animatedbackground.cpp \
+    src/ui/widget/menubutton.cpp
 
 HEADERS += \
     include/file/filereader.h \
@@ -29,7 +31,9 @@ HEADERS += \
     include/model/argument.h \
     include/network/networkinfo.h \
     include/ui/maindialog.h \
-    include/ui/widget/animatedbackground.h
+    include/ui/view/mainview.h \
+    include/ui/widget/animatedbackground.h \
+    include/ui/widget/menubutton.h
 
 INCLUDEPATH += \
     include

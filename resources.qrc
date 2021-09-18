@@ -8,4 +8,7 @@
         <file alias="bg-main5.jpg">resource/image/background/main5.jpg</file>
         <file alias="halodoom.png">resource/image/halodoom.png</file>
     </qresource>
+    <qresource prefix="font">
+        <file alias="bahnschrift.ttf">resource/font/bahnschrift.ttf</file>
+    </qresource>
 </RCC>
