@@ -17,8 +17,11 @@ SOURCES += \
     src/network/networkinfo.cpp \
     src/ui/maindialog.cpp \
     src/ui/view/mainview.cpp \
+    src/ui/view/multiplayer/multiplayerview.cpp \
+    src/ui/view/offline/offlineview.cpp \
     src/ui/widget/animatedbackground.cpp \
-    src/ui/widget/menubutton.cpp
+    src/ui/widget/menubutton.cpp \
+    src/ui/widget/pageheader.cpp
 
 HEADERS += \
     include/file/filereader.h \
@@ -32,8 +35,11 @@ HEADERS += \
     include/network/networkinfo.h \
     include/ui/maindialog.h \
     include/ui/view/mainview.h \
+    include/ui/view/multiplayer/multiplayerview.h \
+    include/ui/view/offline/offlineview.h \
     include/ui/widget/animatedbackground.h \
-    include/ui/widget/menubutton.h
+    include/ui/widget/menubutton.h \
+    include/ui/widget/pageheader.h
 
 INCLUDEPATH += \
     include

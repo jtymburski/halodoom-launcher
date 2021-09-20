@@ -7,7 +7,10 @@
  */
 #include "ui/view/mainview.h"
 
-/* Constructor, with just the parent */
+/**
+ * Constructor, with just the parent.
+ * @param parent top level owning widget, for garbage collection
+ */
 MainView::MainView(QWidget *parent) : QWidget(parent)
 {
   QGridLayout* layout = new QGridLayout(this);
@@ -27,16 +30,19 @@ MainView::MainView(QWidget *parent) : QWidget(parent)
 
   // Buttons
   QVBoxLayout* button_layout = new QVBoxLayout();
-  button_layout->setMargin(150);
+  button_layout->setContentsMargins(175, 150, 150, 150);
   button_layout->setSpacing(15);
 
-  MenuButton* multiplayer_button = new MenuButton("Multiplayer", this);
+  MenuButton* multiplayer_button = new MenuButton("Multiplayer", BUTTON_FONT_SIZE_PX, this);
+  connect(multiplayer_button, SIGNAL(clicked()), this, SIGNAL(selectMultiplayer()));
   button_layout->addWidget(multiplayer_button);
 
-  MenuButton* offline_button = new MenuButton("Offline Skirmish", this);
+  MenuButton* offline_button = new MenuButton("Offline Skirmish", BUTTON_FONT_SIZE_PX, this);
+  connect(offline_button, SIGNAL(clicked()), this, SIGNAL(selectOfflineSkirmish()));
   button_layout->addWidget(offline_button);
 
-  MenuButton* exit_button = new MenuButton("Exit", this);
+  MenuButton* exit_button = new MenuButton("Exit", BUTTON_FONT_SIZE_PX, this);
+  connect(exit_button, SIGNAL(clicked()), this, SIGNAL(selectExit()));
   button_layout->addWidget(exit_button);
 
   layout->addLayout(button_layout, 1, 0);

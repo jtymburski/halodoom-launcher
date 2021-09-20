@@ -9,9 +9,11 @@
 /**
  * Constructor, with just text and the parent.
  * @param text string inside the button
+ * @param font_size pixel (px) size of the button text font
  * @param parent top level owning widget, for garbage collection
  */
-MenuButton::MenuButton(const QString &text, QWidget *parent) : QPushButton(text, parent)
+MenuButton::MenuButton(const QString &text, int font_size, QWidget *parent)
+          : QPushButton(text, parent)
 {
   setFlat(true);
   setStyleSheet(
@@ -19,7 +21,7 @@ MenuButton::MenuButton(const QString &text, QWidget *parent) : QPushButton(text,
           "border:0;"
           "color:white;"
           "font-family:bahnschrift;"
-          "font-size:50px;"
+          "font-size:" + QString::number(font_size) + "px;"
           "padding:10px 25px;"
           "text-align:left"
         "}"

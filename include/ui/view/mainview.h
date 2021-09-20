@@ -21,6 +21,20 @@ class MainView : public QWidget
 public:
   /* Constructor, with just the parent */
   MainView(QWidget *parent = nullptr);
+
+private:
+  /* Menu button font size in pixels */
+  const static int BUTTON_FONT_SIZE_PX = 50;
+
+signals:
+  /* Exit option selected in view */
+  void selectExit();
+
+  /* Multiplayer option selected in view */
+  void selectMultiplayer();
+
+  /* Offline skirmish option selected in view */
+  void selectOfflineSkirmish();
 };
 
 #endif // MAINVIEW_H

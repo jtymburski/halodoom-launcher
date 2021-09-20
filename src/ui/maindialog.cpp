@@ -4,6 +4,10 @@
 const QSize MainDialog::RESOLUTION_LARGE = QSize(1920, 1080);
 const QSize MainDialog::RESOLUTION_SMALL = QSize(1280, 720);
 
+/**
+ * Constructor, with just the parent.
+ * @param parent top level owning widget, for garbage collection
+ */
 MainDialog::MainDialog(QWidget *parent)
   : QDialog(parent)
 {
@@ -17,12 +21,51 @@ MainDialog::MainDialog(QWidget *parent)
   else
     setFixedSize(RESOLUTION_SMALL);
 
-  QStackedLayout* layout = new QStackedLayout(this);
+  view_layout = new QStackedLayout(this);
 
-  MainView* main_view = new MainView(this);
-  layout->addWidget(main_view);
+  view_main = new MainView(this);
+  connect(view_main, SIGNAL(selectExit()), this, SLOT(exit()));
+  connect(view_main, SIGNAL(selectMultiplayer()), this, SLOT(viewMultiplayer()));
+  connect(view_main, SIGNAL(selectOfflineSkirmish()), this, SLOT(viewOfflineSkirmish()));
+  view_layout->addWidget(view_main);
+
+  view_multiplayer = new MultiplayerView(this);
+  connect(view_multiplayer, SIGNAL(selectBackButton()), this, SLOT(viewMain()));
+  view_layout->addWidget(view_multiplayer);
+
+  view_offline = new OfflineView(this);
+  connect(view_offline, SIGNAL(selectBackButton()), this, SLOT(viewMain()));
+  view_layout->addWidget(view_offline);
 }
 
-MainDialog::~MainDialog()
+/**
+ * Close and exit the dialog.
+ */
+void MainDialog::exit()
 {
+  QCoreApplication::exit();
+}
+
+/**
+ * View the main screen widget.
+ */
+void MainDialog::viewMain()
+{
+  view_layout->setCurrentWidget(view_main);
+}
+
+/**
+ * View the multiplayer flow widget.
+ */
+void MainDialog::viewMultiplayer()
+{
+  view_layout->setCurrentWidget(view_multiplayer);
+}
+
+/**
+ * View the offline skirmish flow widget.
+ */
+void MainDialog::viewOfflineSkirmish()
+{
+  view_layout->setCurrentWidget(view_offline);
 }

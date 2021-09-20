@@ -13,7 +13,7 @@ class MenuButton : public QPushButton
 {
 public:
   /* Constructor, with just text and the parent */
-  MenuButton(const QString &text, QWidget *parent = nullptr);
+  MenuButton(const QString &text, int font_size, QWidget *parent = nullptr);
 };
 
 #endif // MENUBUTTON_H

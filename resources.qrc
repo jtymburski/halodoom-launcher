@@ -6,6 +6,8 @@
         <file alias="bg-main3.jpg">resource/image/background/main3.jpg</file>
         <file alias="bg-main4.jpg">resource/image/background/main4.jpg</file>
         <file alias="bg-main5.jpg">resource/image/background/main5.jpg</file>
+        <file alias="bg-multi1.jpg">resource/image/background/multi1.jpg</file>
+        <file alias="bg-offline1.jpg">resource/image/background/offline1.jpg</file>
         <file alias="halodoom.png">resource/image/halodoom.png</file>
     </qresource>
     <qresource prefix="font">
