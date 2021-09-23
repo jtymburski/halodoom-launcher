@@ -24,7 +24,7 @@ public:
 
 signals:
   /* Back button selected in view */
-  void selectBackButton();
+  void backClicked();
 };
 
 #endif // OFFLINEVIEW_H

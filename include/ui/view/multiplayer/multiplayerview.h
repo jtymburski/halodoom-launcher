@@ -11,6 +11,7 @@
 #include <QStackedLayout>
 #include <QWidget>
 
+#include "ui/view/multiplayer/multiplayermainview.h"
 #include "ui/widget/animatedbackground.h"
 #include "ui/widget/pageheader.h"
 
@@ -22,9 +23,29 @@ public:
   /* Constructor, with just the parent */
   MultiplayerView(QWidget *parent = nullptr);
 
+private:
+  /* Stack of all functional views in the body of the page */
+  QStackedLayout *view_layout;
+
+  /* Main view. Starting point of the multiplayer flow */
+  MultiplayerMainView *view_main;
+
 signals:
   /* Back button selected in view */
-  void selectBackButton();
+  void backClicked();
+
+private slots:
+  /* Back selected in the page. Cycle back through the views before exiting this view */
+  void goBack();
+
+  /* View the create new game flow */
+  void viewCreate();
+
+  /* View the join (search) for existing game flow */
+  void viewJoin();
+
+  /* View the main screen */
+  void viewMain();
 };
 
 #endif // MULTIPLAYERVIEW_H

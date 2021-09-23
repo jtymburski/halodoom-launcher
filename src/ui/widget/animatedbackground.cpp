@@ -14,7 +14,7 @@
 AnimatedBackground::AnimatedBackground(QWidget *parent) : QWidget(parent)
 {
   // By default, dither is always added as the base overlay, painted above the backgrounds
-  overlays.append(QImage(":/image/bg-dither.png"));
+  overlays.append(QImage(":/image/background/dither.png"));
 
   // Background cycle timer
   QTimer *background_timer = new QTimer(this);

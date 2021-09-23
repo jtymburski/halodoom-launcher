@@ -18,12 +18,12 @@ OfflineView::OfflineView(QWidget *parent) : QWidget(parent)
 
   // Animated background
   AnimatedBackground* background = new AnimatedBackground(this);
-  background->addBackground(":/image/bg-offline1.jpg");
+  background->addBackground(":/image/background/offline1.jpg");
   layout->addWidget(background, 0, 0, -1, -1);
 
   // Page header
   PageHeader* header = new PageHeader("Offline Skirmish", "Main Menu", this);
-  connect(header, SIGNAL(selectBackButton()), this, SIGNAL(selectBackButton()));
+  connect(header, SIGNAL(backClicked()), this, SIGNAL(backClicked()));
   layout->addWidget(header, 0, 0);
 
   // Stack of views, one to be displayed at a time only

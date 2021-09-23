@@ -20,11 +20,11 @@ MainView::MainView(QWidget *parent) : QWidget(parent)
 
   // Animated background
   AnimatedBackground* background = new AnimatedBackground(this);
-  background->addBackground(":/image/bg-main1.jpg");
-  background->addBackground(":/image/bg-main2.jpg");
-  background->addBackground(":/image/bg-main3.jpg");
-  background->addBackground(":/image/bg-main4.jpg");
-  background->addBackground(":/image/bg-main5.jpg");
+  background->addBackground(":/image/background/main1.jpg");
+  background->addBackground(":/image/background/main2.jpg");
+  background->addBackground(":/image/background/main3.jpg");
+  background->addBackground(":/image/background/main4.jpg");
+  background->addBackground(":/image/background/main5.jpg");
   background->addOverlay(":/image/halodoom.png");
   layout->addWidget(background, 0, 0, -1, -1);
 

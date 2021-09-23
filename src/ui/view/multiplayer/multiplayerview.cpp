@@ -18,18 +18,51 @@ MultiplayerView::MultiplayerView(QWidget *parent) : QWidget(parent)
 
   // Animated background
   AnimatedBackground* background = new AnimatedBackground(this);
-  background->addBackground(":/image/bg-multi1.jpg");
+  background->addBackground(":/image/background/multi1.jpg");
   layout->addWidget(background, 0, 0, -1, -1);
 
   // Page header
   PageHeader* header = new PageHeader("Multiplayer", "Main Menu", this);
-  connect(header, SIGNAL(selectBackButton()), this, SIGNAL(selectBackButton()));
+  connect(header, SIGNAL(backClicked()), this, SLOT(goBack()));
   layout->addWidget(header, 0, 0);
 
   // Stack of views, one to be displayed at a time only
-  QStackedLayout* view_layout = new QStackedLayout();
+  view_layout = new QStackedLayout();
 
-  // TODO: Place views here
+  view_main = new MultiplayerMainView(this);
+  connect(view_main, SIGNAL(createClicked()), this, SLOT(viewCreate()));
+  connect(view_main, SIGNAL(joinClicked()), this, SLOT(viewJoin()));
+  view_layout->addWidget(view_main);
 
   layout->addLayout(view_layout, 1, 0);
+}
+
+/**
+ * Back selected slot in the page. Cycle back through the views before exiting this view.
+ */
+void MultiplayerView::goBack()
+{
+  emit backClicked();
+}
+
+/**
+ * View the create new game flow widget slot.
+ */
+void MultiplayerView::viewCreate()
+{
+}
+
+/**
+ * View the join (search) for existing game flow widget slot.
+ */
+void MultiplayerView::viewJoin()
+{
+}
+
+/**
+ * View the main screen widget slot.
+ */
+void MultiplayerView::viewMain()
+{
+  view_layout->setCurrentWidget(view_main);
 }

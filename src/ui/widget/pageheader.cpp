@@ -29,6 +29,6 @@ PageHeader::PageHeader(QString main_title, QString back_name, QWidget *parent) :
   layout->addWidget(label_title, 0, 0, 1, 3);
 
   MenuButton* button_back = new MenuButton("← " + back_name, 30, this);
-  connect(button_back, SIGNAL(clicked()), this, SIGNAL(selectBackButton()));
+  connect(button_back, SIGNAL(clicked()), this, SIGNAL(backClicked()));
   layout->addWidget(button_back, 0, 0);
 }

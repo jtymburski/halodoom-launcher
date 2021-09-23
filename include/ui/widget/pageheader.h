@@ -23,7 +23,7 @@ public:
 
 signals:
   /* Back button selected in view */
-  void selectBackButton();
+  void backClicked();
 };
 
 #endif // PAGEHEADER_H

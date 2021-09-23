@@ -30,11 +30,11 @@ MainDialog::MainDialog(QWidget *parent)
   view_layout->addWidget(view_main);
 
   view_multiplayer = new MultiplayerView(this);
-  connect(view_multiplayer, SIGNAL(selectBackButton()), this, SLOT(viewMain()));
+  connect(view_multiplayer, SIGNAL(backClicked()), this, SLOT(viewMain()));
   view_layout->addWidget(view_multiplayer);
 
   view_offline = new OfflineView(this);
-  connect(view_offline, SIGNAL(selectBackButton()), this, SLOT(viewMain()));
+  connect(view_offline, SIGNAL(backClicked()), this, SLOT(viewMain()));
   view_layout->addWidget(view_offline);
 }
 
