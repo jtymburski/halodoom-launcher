@@ -66,9 +66,10 @@ macx {
   RESOURCES += resources-mac.qrc
 
   appBinaries.files += $$PWD/resource/executable/mac/Zandronum.app \
-                       $$files($$PWD/resource/executable/generic/*) \
+                       $$files($$PWD/resource/executable/generic/*)
   appBinaries.path = Contents/Resources
-  QMAKE_BUNDLE_DATA += appBinaries
+
+  QMAKE_BUNDLE_DATA += macBinaries
 }
 
 win32 {
