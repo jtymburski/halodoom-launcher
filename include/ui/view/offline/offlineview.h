@@ -8,9 +8,9 @@
 #define OFFLINEVIEW_H
 
 #include <QGridLayout>
-#include <QStackedLayout>
 #include <QWidget>
 
+#include "ui/view/create/gamecreateview.h"
 #include "ui/widget/animatedbackground.h"
 #include "ui/widget/pageheader.h"
 

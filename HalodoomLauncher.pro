@@ -16,7 +16,12 @@ SOURCES += \
     src/model/argument.cpp \
     src/network/networkinfo.cpp \
     src/ui/maindialog.cpp \
+    src/ui/view/create/gamecreateview.cpp \
+    src/ui/view/create/gamemapview.cpp \
+    src/ui/view/create/gamemodeview.cpp \
+    src/ui/view/create/gameoptionsview.cpp \
     src/ui/view/mainview.cpp \
+    src/ui/view/multiplayer/multiplayerjoinview.cpp \
     src/ui/view/multiplayer/multiplayermainview.cpp \
     src/ui/view/multiplayer/multiplayerview.cpp \
     src/ui/view/offline/offlineview.cpp \
@@ -36,7 +41,12 @@ HEADERS += \
     include/model/argument.h \
     include/network/networkinfo.h \
     include/ui/maindialog.h \
+    include/ui/view/create/gamecreateview.h \
+    include/ui/view/create/gamemapview.h \
+    include/ui/view/create/gamemodeview.h \
+    include/ui/view/create/gameoptionsview.h \
     include/ui/view/mainview.h \
+    include/ui/view/multiplayer/multiplayerjoinview.h \
     include/ui/view/multiplayer/multiplayermainview.h \
     include/ui/view/multiplayer/multiplayerview.h \
     include/ui/view/offline/offlineview.h \

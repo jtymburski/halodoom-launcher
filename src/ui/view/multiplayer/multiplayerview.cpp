@@ -29,12 +29,19 @@ MultiplayerView::MultiplayerView(QWidget *parent) : QWidget(parent)
   // Stack of views, one to be displayed at a time only
   view_layout = new QStackedLayout();
 
+  view_create = new GameCreateView(this);
+  view_layout->addWidget(view_create);
+
+  view_join = new MultiplayerJoinView(this);
+  view_layout->addWidget(view_join);
+
   view_main = new MultiplayerMainView(this);
   connect(view_main, SIGNAL(createClicked()), this, SLOT(viewCreate()));
   connect(view_main, SIGNAL(joinClicked()), this, SLOT(viewJoin()));
   view_layout->addWidget(view_main);
 
   layout->addLayout(view_layout, 1, 0);
+  viewMain();
 }
 
 /**
@@ -43,6 +50,7 @@ MultiplayerView::MultiplayerView(QWidget *parent) : QWidget(parent)
 void MultiplayerView::goBack()
 {
   emit backClicked();
+  viewMain();
 }
 
 /**
@@ -50,6 +58,7 @@ void MultiplayerView::goBack()
  */
 void MultiplayerView::viewCreate()
 {
+  view_layout->setCurrentWidget(view_create);
 }
 
 /**
@@ -57,6 +66,7 @@ void MultiplayerView::viewCreate()
  */
 void MultiplayerView::viewJoin()
 {
+  view_layout->setCurrentWidget(view_join);
 }
 
 /**
