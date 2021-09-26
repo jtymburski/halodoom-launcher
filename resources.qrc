@@ -11,6 +11,12 @@
 
         <file alias="halodoom.png">resource/image/halodoom.png</file>
 
+        <file alias="map/floodgulch.jpg">resource/image/map/floodgulch.jpg</file>
+        <file alias="map/ghostship.jpg">resource/image/map/ghostship.jpg</file>
+        <file alias="map/rebellion.jpg">resource/image/map/rebellion.jpg</file>
+        <file alias="map/submerged.jpg">resource/image/map/submerged.jpg</file>
+        <file alias="map/warehouse.jpg">resource/image/map/warehouse.jpg</file>
+
         <file alias="multiplayer/create.jpg">resource/image/multiplayer/create.jpg</file>
         <file alias="multiplayer/create-hover.jpg">resource/image/multiplayer/create_hover.jpg</file>
         <file alias="multiplayer/join.jpg">resource/image/multiplayer/join.jpg</file>

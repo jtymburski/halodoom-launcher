@@ -34,3 +34,13 @@ MenuButton::MenuButton(const QString &text, int font_size, QWidget *parent)
                                             "stop:.60 #68c3fe, stop:1 transparent)"
         "}");
 }
+
+/**
+ * Enter event state triggered by the QEvent system.
+ * @param event triggering context
+ */
+void MenuButton::enterEvent(QEvent *event)
+{
+  emit hovered();
+  QWidget::enterEvent(event);
+}

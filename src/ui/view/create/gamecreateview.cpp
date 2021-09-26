@@ -15,6 +15,7 @@ GameCreateView::GameCreateView(QWidget *parent) : QWidget(parent)
   view_layout = new QStackedLayout(this);
 
   view_map = new GameMapView(this);
+  connect(view_map, &GameMapView::mapSelected, this, &GameCreateView::viewMode);
   view_layout->addWidget(view_map);
 
   view_mode = new GameModeView(this);
