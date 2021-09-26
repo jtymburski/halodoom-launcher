@@ -6,12 +6,10 @@
 #ifndef GAMEMODEVIEW_H
 #define GAMEMODEVIEW_H
 
-#include <QWidget>
+#include "ui/view/create/gameselectview.h"
 
-class GameModeView : public QWidget
+class GameModeView : public GameSelectView
 {
-  Q_OBJECT
-
 public:
   /* Constructor, with just the parent */
   GameModeView(QWidget *parent = nullptr);

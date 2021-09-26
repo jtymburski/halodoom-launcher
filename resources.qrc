@@ -17,6 +17,12 @@
         <file alias="map/submerged.jpg">resource/image/map/submerged.jpg</file>
         <file alias="map/warehouse.jpg">resource/image/map/warehouse.jpg</file>
 
+        <file alias="mode/fiesta.jpg">resource/image/mode/fiesta.jpg</file>
+        <file alias="mode/slayer.jpg">resource/image/mode/slayer.jpg</file>
+        <file alias="mode/snipers.jpg">resource/image/mode/snipers.jpg</file>
+        <file alias="mode/swat.jpg">resource/image/mode/swat.jpg</file>
+        <file alias="mode/swords.jpg">resource/image/mode/swords.jpg</file>
+
         <file alias="multiplayer/create.jpg">resource/image/multiplayer/create.jpg</file>
         <file alias="multiplayer/create-hover.jpg">resource/image/multiplayer/create_hover.jpg</file>
         <file alias="multiplayer/join.jpg">resource/image/multiplayer/join.jpg</file>

@@ -44,7 +44,7 @@ signals:
 
 private slots:
   /* Back selected in the page. Cycle back through the views before exiting this view */
-  void goBack();
+  void backToPreviousView();
 
   /* View the create new game flow */
   void viewCreate();

@@ -23,10 +23,19 @@ OfflineView::OfflineView(QWidget *parent) : QWidget(parent)
 
   // Page header
   PageHeader *header = new PageHeader("Offline Skirmish", "Main Menu", this);
-  connect(header, SIGNAL(backClicked()), this, SIGNAL(backClicked()));
+  connect(header, SIGNAL(backClicked()), this, SLOT(backToPreviousView()));
   layout->addWidget(header, 0, 0);
 
   // Game create main view
-  GameCreateView *view_create = new GameCreateView(this);
+  view_create = new GameCreateView(this);
   layout->addWidget(view_create, 1, 0);
+}
+
+/**
+ * Back selected slot in the page. Cycle back through the views before exiting this view.
+ */
+void OfflineView::backToPreviousView()
+{
+  if(!view_create->backToPreviousView())
+    emit backClicked();
 }

@@ -22,9 +22,17 @@ public:
   /* Constructor, with just the parent */
   OfflineView(QWidget *parent = nullptr);
 
+private:
+  /* Create new game view */
+  GameCreateView *view_create;
+
 signals:
   /* Back button selected in view */
   void backClicked();
+
+private slots:
+  /* Back selected in the page. Cycle back through the views before exiting this view */
+  void backToPreviousView();
 };
 
 #endif // OFFLINEVIEW_H

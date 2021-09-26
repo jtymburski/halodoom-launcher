@@ -21,6 +21,7 @@ SOURCES += \
     src/ui/view/create/gamemodeview.cpp \
     src/ui/view/create/gameoptionsview.cpp \
     src/ui/view/create/gameselection.cpp \
+    src/ui/view/create/gameselectview.cpp \
     src/ui/view/mainview.cpp \
     src/ui/view/multiplayer/multiplayerjoinview.cpp \
     src/ui/view/multiplayer/multiplayermainview.cpp \
@@ -47,6 +48,7 @@ HEADERS += \
     include/ui/view/create/gamemodeview.h \
     include/ui/view/create/gameoptionsview.h \
     include/ui/view/create/gameselection.h \
+    include/ui/view/create/gameselectview.h \
     include/ui/view/mainview.h \
     include/ui/view/multiplayer/multiplayerjoinview.h \
     include/ui/view/multiplayer/multiplayermainview.h \

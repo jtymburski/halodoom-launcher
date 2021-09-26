@@ -23,7 +23,7 @@ MultiplayerView::MultiplayerView(QWidget *parent) : QWidget(parent)
 
   // Page header
   PageHeader* header = new PageHeader("Multiplayer", "Main Menu", this);
-  connect(header, SIGNAL(backClicked()), this, SLOT(goBack()));
+  connect(header, SIGNAL(backClicked()), this, SLOT(backToPreviousView()));
   layout->addWidget(header, 0, 0);
 
   // Stack of views, one to be displayed at a time only
@@ -47,10 +47,22 @@ MultiplayerView::MultiplayerView(QWidget *parent) : QWidget(parent)
 /**
  * Back selected slot in the page. Cycle back through the views before exiting this view.
  */
-void MultiplayerView::goBack()
+void MultiplayerView::backToPreviousView()
 {
-  emit backClicked();
-  viewMain();
+  if(view_layout->currentWidget() == view_create)
+  {
+    if(!view_create->backToPreviousView())
+      viewMain();
+  }
+  else if(view_layout->currentWidget() == view_join)
+  {
+    viewMain();
+  }
+  else
+  {
+    emit backClicked();
+    viewMain();
+  }
 }
 
 /**
