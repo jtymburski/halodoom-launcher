@@ -29,24 +29,12 @@ GameSelectView::GameSelectView(QWidget *parent) : QWidget(parent)
   label_image = new QLabel(this);
   layout->addWidget(label_image, 1, 3, 3, 3);
 
-  QLabel *label_description_header = new QLabel("SUMMARY", this);
-  label_description_header->setStyleSheet(
-        "QLabel {"
-          "color:#68c4ff;"
-          "font-family:bahnschrift;"
-          "font-size:18px;"
-          "QFont::bold"
-        "}");
+  TextView *label_description_header = new TextView("SUMMARY", QColor("#68c4ff"), 24,
+                                                    QSize(0, 0), this);
   layout->addWidget(label_description_header, 4, 4);
 
-  label_description = new QLabel(this);
+  label_description = new TextView("Description", QColorConstants::White, 20, QSize(0, 0), this);
   label_description->setWordWrap(true);
-  label_description->setStyleSheet(
-        "QLabel {"
-          "color:white;"
-          "font-family:bahnschrift;"
-          "font-size:16px"
-        "}");
   layout->addWidget(label_description, 5, 4, Qt::AlignTop);
 }
 
@@ -80,14 +68,7 @@ void GameSelectView::createSelections(const QString &title,
   layout_names->addSpacerItem(
         new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
 
-  QLabel *label_header = new QLabel(title, this);
-  label_header->setStyleSheet(
-        "QLabel {"
-          "color:#68c4ff;"
-          "font-family:bahnschrift;"
-          "font-size:34px;"
-          "QFont::bold"
-        "}");
+  TextView *label_header = new TextView(title, QColor("#68c4ff"), 34, QSize(0, 0), this);
   layout_names->addWidget(label_header);
   layout_names->addSpacerItem(new QSpacerItem(0, 20));
 

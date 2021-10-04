@@ -7,7 +7,14 @@
 #ifndef GAMEOPTIONSVIEW_H
 #define GAMEOPTIONSVIEW_H
 
+#include <QGridLayout>
+#include <QLabel>
+#include <QVBoxLayout>
 #include <QWidget>
+
+#include "ui/widget/menubutton.h"
+#include "ui/widget/slider.h"
+#include "ui/widget/textview.h"
 
 class GameOptionsView : public QWidget
 {

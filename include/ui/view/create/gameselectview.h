@@ -15,6 +15,7 @@
 
 #include "ui/view/create/gameselection.h"
 #include "ui/widget/menubutton.h"
+#include "ui/widget/textview.h"
 
 class GameSelectView : public QWidget
 {

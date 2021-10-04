@@ -27,6 +27,12 @@
         <file alias="multiplayer/create-hover.jpg">resource/image/multiplayer/create_hover.jpg</file>
         <file alias="multiplayer/join.jpg">resource/image/multiplayer/join.jpg</file>
         <file alias="multiplayer/join-hover.jpg">resource/image/multiplayer/join_hover.jpg</file>
+
+        <file alias="player/avalon.jpg">resource/image/player/avalon.jpg</file>
+        <file alias="player/nexiam.jpg">resource/image/player/nexiam.jpg</file>
+        <file alias="player/ramsus.jpg">resource/image/player/ramsus.jpg</file>
+        <file alias="player/uzziel.jpg">resource/image/player/uzziel.jpg</file>
+        <file alias="player/zetsui.jpg">resource/image/player/zetsui.jpg</file>
     </qresource>
     <qresource prefix="font">
         <file alias="bahnschrift.ttf">resource/font/bahnschrift.ttf</file>

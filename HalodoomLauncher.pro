@@ -30,7 +30,9 @@ SOURCES += \
     src/ui/widget/animatedbackground.cpp \
     src/ui/widget/imagebutton.cpp \
     src/ui/widget/menubutton.cpp \
-    src/ui/widget/pageheader.cpp
+    src/ui/widget/pageheader.cpp \
+    src/ui/widget/slider.cpp \
+    src/ui/widget/textview.cpp
 
 HEADERS += \
     include/file/filereader.h \
@@ -57,7 +59,9 @@ HEADERS += \
     include/ui/widget/animatedbackground.h \
     include/ui/widget/imagebutton.h \
     include/ui/widget/menubutton.h \
-    include/ui/widget/pageheader.h
+    include/ui/widget/pageheader.h \
+    include/ui/widget/slider.h \
+    include/ui/widget/textview.h
 
 INCLUDEPATH += \
     include
