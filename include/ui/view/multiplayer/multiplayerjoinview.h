@@ -7,7 +7,12 @@
 #ifndef MULTIPLAYERJOINVIEW_H
 #define MULTIPLAYERJOINVIEW_H
 
+#include <QGridLayout>
+#include <QLabel>
 #include <QWidget>
+
+#include "ui/widget/menubutton.h"
+#include "ui/widget/textview.h"
 
 class MultiplayerJoinView : public QWidget
 {

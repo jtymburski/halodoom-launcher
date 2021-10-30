@@ -140,12 +140,12 @@ GameOptionsView::GameOptionsView(QWidget *parent) : QWidget(parent)
   QHBoxLayout *layout_create = new QHBoxLayout();
   layout_create->addSpacerItem(
         new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
-  MenuButton* button_create = new MenuButton("Create →", 50, this);
+  MenuButton* button_create = new MenuButton("Create →", 42, this);
   connect(button_create, &MenuButton::clicked, this, &GameOptionsView::configured);
   layout_create->addWidget(button_create);
   layout_create->addSpacerItem(
         new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
-  layout->addLayout(layout_create, 4, 7, 2, 4);
+  layout->addLayout(layout_create, 4, 8, 2, 3);
 }
 
 /* ---- PRIVATE FUNCTIONS ---- */
