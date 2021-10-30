@@ -32,55 +32,48 @@ GameOptionsView::GameOptionsView(QWidget *parent) : QWidget(parent)
   layout->setRowStretch(5, 1);
 
   // Bot preview and description
-  QLabel *label_image = new QLabel(this);
-  label_image->setStyleSheet(
-        "QLabel {"
-          "border:0;"
-          "border-image:url(:/image/player/avalon.jpg) 0 0 0 0 stretch stretch"
-        "}");
-  layout->addWidget(label_image, 2, 1);
+  label_bot_image = new QLabel(this);
+  layout->addWidget(label_bot_image, 2, 1);
 
   TextView *label_description_header = new TextView("SUMMARY", QColor("#68c4ff"), 24,
                                                     QSize(0, 0), this);
   layout->addWidget(label_description_header, 3, 1);
 
-  TextView *label_description = new TextView("Samurai of the Code of Silence, favors Covenant "
-                                             "weapons, with a particular fondness to the Energy "
-                                             "Sword",
-                                             QColorConstants::White, 20, QSize(0, 0), this);
-  label_description->setWordWrap(true);
-  layout->addWidget(label_description, 4, 1, 1, 4, Qt::AlignTop);
+  label_bot_description = new TextView("", QColorConstants::White, 20, QSize(0, 0), this);
+  label_bot_description->setWordWrap(true);
+  layout->addWidget(label_bot_description, 4, 1, 1, 4, Qt::AlignTop);
 
   TextView *label_add_header = new TextView("Add Bots", QColor("#68c4ff"), 34,
                                             QSize(0, 0), this);
   layout->addWidget(label_add_header, 1, 3);
 
   // Selectable list of bots
+  available_bots = createAvailableBots();
   QVBoxLayout *layout_add_buttons = new QVBoxLayout();
   layout_add_buttons->addSpacerItem(
         new QSpacerItem(0, 25, QSizePolicy::Expanding, QSizePolicy::Fixed));
 
-  MenuButton *button1 = new MenuButton("Ramsus", 30, this);
-  layout_add_buttons->addWidget(button1);
-  MenuButton *button2 = new MenuButton("Avalon", 30, this);
-  layout_add_buttons->addWidget(button2);
-  MenuButton *button3 = new MenuButton("Nexiam", 30, this);
-  layout_add_buttons->addWidget(button3);
-  MenuButton *button4 = new MenuButton("Uzziel", 30, this);
-  layout_add_buttons->addWidget(button4);
-  MenuButton *button5 = new MenuButton("Zetsui", 30, this);
-  layout_add_buttons->addWidget(button5);
+  for(auto const &bot : qAsConst(this->available_bots))
+  {
+    MenuButton *button_bot = new MenuButton(bot.getName(), 30, this);
+    connect(button_bot, &MenuButton::clicked, this, [=]() { this->addBot(bot); });
+    connect(button_bot, &MenuButton::hovered, this, [=]() { this->viewBot(bot); });
+    layout_add_buttons->addWidget(button_bot);
+  }
+  viewBot(available_bots.first());
 
   layout_add_buttons->addSpacerItem(
         new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
   layout->addLayout(layout_add_buttons, 2, 3);
 
   QVBoxLayout *layout_added_players = new QVBoxLayout();
-  for(int i = 0; i < 9; i++)
+  for(int i = 0; i < 8; i++)
   {
-    MenuButton *row = new MenuButton("-", 30);
+    MenuButton *row = new MenuButton("-", 30, this);
     row->setBackgroundFilled(true);
+    connect(row, &MenuButton::clicked, this, [=]() { this->removeBot(i); });
     layout_added_players->addWidget(row);
+    selected_bot_views.append(row);
   }
   layout_added_players->addSpacerItem(
         new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
@@ -89,17 +82,17 @@ GameOptionsView::GameOptionsView(QWidget *parent) : QWidget(parent)
   // Option Names (Left Column)
   QVBoxLayout *layout_option_names = new QVBoxLayout();
 
-  TextView *label_name1 = new TextView("Max Players", QColorConstants::White, 30,
+  TextView *label_player_count = new TextView("Max Players", QColorConstants::White, 30,
                                        QSize(25, 12), this);
-  layout_option_names->addWidget(label_name1);
+  layout_option_names->addWidget(label_player_count);
 
-  TextView *label_name2 = new TextView("Time Limit", QColorConstants::White, 30,
-                                       QSize(25, 12), this);
-  layout_option_names->addWidget(label_name2);
+  TextView *label_time_limit = new TextView("Time Limit", QColorConstants::White, 30,
+                                            QSize(25, 12), this);
+  layout_option_names->addWidget(label_time_limit);
 
-  TextView *label_name3 = new TextView("Score Limit", QColorConstants::White, 30,
-                                       QSize(25, 12), this);
-  layout_option_names->addWidget(label_name3);
+  TextView *label_score_limit = new TextView("Score Limit", QColorConstants::White, 30,
+                                             QSize(25, 12), this);
+  layout_option_names->addWidget(label_score_limit);
 
   layout_option_names->addSpacerItem(
         new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
@@ -108,14 +101,17 @@ GameOptionsView::GameOptionsView(QWidget *parent) : QWidget(parent)
   // Option Interactive UI (Center Column)
   QVBoxLayout *layout_options = new QVBoxLayout();
 
-  Slider *slider1 = new Slider(8, 1, 16, this);
-  layout_options->addWidget(slider1);
+  Slider *slider_player_count = new Slider(8, 1, 16, this);
+  connect(slider_player_count, &Slider::valueChanged, this, &GameOptionsView::updatePlayerCount);
+  layout_options->addWidget(slider_player_count);
 
-  Slider *slider2 = new Slider(20, 1, 120, this);
-  layout_options->addWidget(slider2);
+  Slider *slider_time_limit = new Slider(20, 2, 120, this);
+  connect(slider_time_limit, &Slider::valueChanged, this, &GameOptionsView::updateTimeLimit);
+  layout_options->addWidget(slider_time_limit);
 
-  Slider *slider3 = new Slider(50, 1, 500, this);
-  layout_options->addWidget(slider3);
+  Slider *slider_score_limit = new Slider(50, 1, 500, this);
+  connect(slider_score_limit, &Slider::valueChanged, this, &GameOptionsView::updateScoreLimit);
+  layout_options->addWidget(slider_score_limit);
 
   layout_options->addSpacerItem(
         new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
@@ -124,16 +120,129 @@ GameOptionsView::GameOptionsView(QWidget *parent) : QWidget(parent)
   // Option Text Details (Right Column)
   QVBoxLayout *layout_option_details = new QVBoxLayout();
 
-  TextView *label_desc1 = new TextView("8", QColorConstants::White, 22, QSize(25, 16), this);
-  layout_option_details->addWidget(label_desc1);
+  label_player_count_value = new TextView("8", QColorConstants::White, 22,
+                                                    QSize(25, 16), this);
+  layout_option_details->addWidget(label_player_count_value);
 
-  TextView *label_desc2 = new TextView("20 min", QColorConstants::White, 22, QSize(25, 16), this);
-  layout_option_details->addWidget(label_desc2);
+  label_time_limit_value = new TextView("20 min", QColorConstants::White, 22,
+                                                  QSize(25, 16), this);
+  layout_option_details->addWidget(label_time_limit_value);
 
-  TextView *label_desc3 = new TextView("50", QColorConstants::White, 22, QSize(25, 16), this);
-  layout_option_details->addWidget(label_desc3);
+  label_score_limit_value = new TextView("50", QColorConstants::White, 22,
+                                                   QSize(25, 16), this);
+  layout_option_details->addWidget(label_score_limit_value);
 
   layout_option_details->addSpacerItem(
         new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
   layout->addLayout(layout_option_details, 1, 10, 4, 1);
+
+  // Create Button
+  QHBoxLayout *layout_create = new QHBoxLayout();
+  layout_create->addSpacerItem(
+        new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
+  MenuButton* button_create = new MenuButton("Create →", 50, this);
+  connect(button_create, &MenuButton::clicked, this, &GameOptionsView::configured);
+  layout_create->addWidget(button_create);
+  layout_create->addSpacerItem(
+        new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
+  layout->addLayout(layout_create, 4, 7, 2, 4);
+}
+
+/* ---- PRIVATE FUNCTIONS ---- */
+
+/* Creates the set of available bots */
+QVector<GameSelection> GameOptionsView::createAvailableBots()
+{
+  return QVector<GameSelection> {
+        GameSelection::Builder()
+            .setDescription("Leader of the Code of Silence, favors heavy combat and vehicles")
+            ->setImagePath(":/image/player/ramsus.jpg")
+            ->setName("Ramsus")
+            ->build(),
+        GameSelection::Builder()
+            .setDescription("Technician for the Code of Silence, favors stealth and cunning")
+            ->setImagePath(":/image/player/avalon.jpg")
+            ->setName("Avalon")
+            ->build(),
+        GameSelection::Builder()
+            .setDescription("Infiltration specialist for the Code of Silence, she favors "
+                            "small arms")
+            ->setImagePath(":/image/player/nexiam.jpg")
+            ->setName("Nexiam")
+            ->build(),
+        GameSelection::Builder()
+            .setDescription("Sniper for the Code of Silence. Favors long range combat")
+            ->setImagePath(":/image/player/uzziel.jpg")
+            ->setName("Uzziel")
+            ->build(),
+        GameSelection::Builder()
+            .setDescription("Samurai of the Code of Silence, favors Covenant weapons, with "
+                            "a particular fondness of the Energy Sword")
+            ->setImagePath(":/image/player/zetsui.jpg")
+            ->setName("Zetsui")
+            ->build()
+  };
+}
+
+/* Update the selected bots list in the UI */
+void GameOptionsView::updateSelectedBots()
+{
+  for(int i = 0; i < selected_bot_views.size(); i++)
+  {
+    if(i < selected_bots.size())
+      selected_bot_views.at(i)->setText(selected_bots.at(i).getName());
+    else
+      selected_bot_views.at(i)->setText("-");
+  }
+}
+
+/* ---- PRIVATE SLOT FUNCTIONS ---- */
+
+/* Add the bot in the UI to the game configuration */
+void GameOptionsView::addBot(const GameSelection &bot)
+{
+  if(selected_bots.size() < selected_bot_views.size())
+  {
+    selected_bots.append(bot);
+    updateSelectedBots();
+  }
+}
+
+/* Remove a bot from the game configuration */
+void GameOptionsView::removeBot(int index)
+{
+  if(index >= 0 && index < selected_bots.size())
+  {
+    selected_bots.remove(index);
+    updateSelectedBots();
+  }
+}
+
+/* Updates the max player count option */
+void GameOptionsView::updatePlayerCount(int player_count)
+{
+  label_player_count_value->setText(QString::number(player_count));
+}
+
+/* Updates the end game score limit (kills) */
+void GameOptionsView::updateScoreLimit(int score_limit)
+{
+  label_score_limit_value->setText(QString::number(score_limit));
+}
+
+/* Updates the end game time limit, in minutes */
+void GameOptionsView::updateTimeLimit(int time_limit)
+{
+  label_time_limit_value->setText(QString::number(time_limit) + " minutes");
+}
+
+/* View the selected bot in the UI */
+void GameOptionsView::viewBot(const GameSelection &bot)
+{
+  label_bot_description->setText(bot.getDescription());
+  label_bot_image->setStyleSheet(
+        "QLabel {"
+          "border:0;"
+          "border-image:url(" + bot.getImagePath() + ") 0 0 0 0 stretch stretch"
+        "}");
 }

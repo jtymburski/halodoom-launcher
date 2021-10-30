@@ -36,6 +36,9 @@ private:
   GameOptionsView *view_options;
 
 private slots:
+  /* Create the game */
+  void create();
+
   /* View the select game map flow */
   void viewMap();
 

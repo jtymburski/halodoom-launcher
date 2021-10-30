@@ -23,9 +23,19 @@ GameCreateView::GameCreateView(QWidget *parent) : QWidget(parent)
   view_layout->addWidget(view_mode);
 
   view_options = new GameOptionsView(this);
+  connect(view_options, &GameOptionsView::configured, this, &GameCreateView::create);
   view_layout->addWidget(view_options);
 
   viewMap();
+}
+
+/* ---- PRIVATE SLOT FUNCTIONS ---- */
+
+/**
+ * Create the game.
+ */
+void GameCreateView::create()
+{
 }
 
 /**

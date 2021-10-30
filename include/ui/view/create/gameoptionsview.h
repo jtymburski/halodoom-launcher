@@ -12,6 +12,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include "ui/view/create/gameselection.h"
 #include "ui/widget/menubutton.h"
 #include "ui/widget/slider.h"
 #include "ui/widget/textview.h"
@@ -23,6 +24,53 @@ class GameOptionsView : public QWidget
 public:
   /* Constructor, with just the parent */
   GameOptionsView(QWidget *parent = nullptr);
+
+private:
+  /* List of all available bots */
+  QVector<GameSelection> available_bots;
+
+  /* Active bot information */
+  TextView *label_bot_description;
+  QLabel *label_bot_image;
+
+  /* Slider labels */
+  TextView *label_player_count_value;
+  TextView *label_score_limit_value;
+  TextView *label_time_limit_value;
+
+  /* List of selected bots and the UI views */
+  QVector<GameSelection> selected_bots;
+  QVector<QPushButton*> selected_bot_views;
+
+signals:
+  /* Finished setting up the game options */
+  void configured();
+
+private:
+  /* Creates the set of available bots */
+  QVector<GameSelection> createAvailableBots();
+
+  /* Update the selected bots list in the UI */
+  void updateSelectedBots();
+
+private slots:
+  /* Add the bot in the UI to the game configuration */
+  void addBot(const GameSelection &bot);
+
+  /* Remove a bot from the game configuration */
+  void removeBot(int index);
+
+  /* Updates the max player count option */
+  void updatePlayerCount(int player_count);
+
+  /* Updates the end game score limit (kills) */
+  void updateScoreLimit(int score_limit);
+
+  /* Updates the end game time limit, in minutes */
+  void updateTimeLimit(int time_limit);
+
+  /* View the selected bot in the UI */
+  void viewBot(const GameSelection &bot);
 };
 
 #endif // GAMEOPTIONSVIEW_H
