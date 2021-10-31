@@ -8,8 +8,10 @@
 #define GAMECREATEVIEW_H
 
 #include <QStackedLayout>
+#include <QVector>
 #include <QWidget>
 
+#include "game/gamecontroller.h"
 #include "ui/view/create/gamemapview.h"
 #include "ui/view/create/gamemodeview.h"
 #include "ui/view/create/gameoptionsview.h"
@@ -20,9 +22,12 @@ class GameCreateView : public QWidget
 
 public:
   /* Constructor, with just the parent */
-  GameCreateView(QWidget *parent = nullptr);
+  GameCreateView(GameController *controller, QWidget *parent = nullptr);
 
 private:
+  /* Game controller, business logic functionality */
+  GameController *controller;
+
   /* Stack of all functional views in the body of the page */
   QStackedLayout *view_layout;
 

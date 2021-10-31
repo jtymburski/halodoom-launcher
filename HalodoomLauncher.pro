@@ -43,6 +43,7 @@ HEADERS += \
     include/game/config/winlaunchconfig.h \
     include/game/gamecontroller.h \
     include/model/argument.h \
+    include/model/gametypes.h \
     include/network/networkinfo.h \
     include/ui/maindialog.h \
     include/ui/view/create/gamecreateview.h \

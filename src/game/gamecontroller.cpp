@@ -131,6 +131,34 @@ void GameController::startServer()
 }
 
 /**
+ * Execute and start a local multiplayer server and a client connected to that server.
+ * @throws std::invalid_parameter if the launch config is misconfigured
+ */
+void GameController::startServerAndClient(const Map &map, const Mode &mode,
+                                          const QVector<Bot> &bots, const int max_player_count,
+                                          const int score_limit, const int time_limit)
+{
+  loadConfig();
+
+  // Configure and launch the server
+  launch_config->insertServerArgument(argument_translator.map(map));
+  launch_config->insertServerArgument(argument_translator.mode(mode));
+  launch_config->insertServerArgument(argument_translator.bots(bots));
+
+  launch_config->insertServerArgument(argument_translator.playerCount(max_player_count));
+  launch_config->setServerConnectionLimit(max_player_count);
+
+  launch_config->insertServerArgument(argument_translator.scoreLimit(score_limit));
+  launch_config->insertServerArgument(argument_translator.timeLimit(time_limit));
+
+  startServerProcess(launch_config->getServerArguments());
+
+  // Configure and launch the client
+  launch_config->setServerAddress("localhost");
+  startGameProcess(launch_config->getClientArguments());
+}
+
+/**
  * Stop a running local multiplayer server, if it exists.
  */
 void GameController::stopServer()

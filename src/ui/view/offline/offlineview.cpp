@@ -8,9 +8,10 @@
 
 /**
  * Constructor, with just the parent.
+ * @param controller game business logic encapsulation
  * @param parent top level owning widget, for garbage collection
  */
-OfflineView::OfflineView(QWidget *parent) : QWidget(parent)
+OfflineView::OfflineView(GameController *controller, QWidget *parent) : QWidget(parent)
 {
   QGridLayout *layout = new QGridLayout(this);
   layout->setMargin(0);
@@ -27,7 +28,7 @@ OfflineView::OfflineView(QWidget *parent) : QWidget(parent)
   layout->addWidget(header, 0, 0);
 
   // Game create main view
-  view_create = new GameCreateView(this);
+  view_create = new GameCreateView(controller, this);
   layout->addWidget(view_create, 1, 0);
 }
 

@@ -33,6 +33,15 @@ QString GameSelection::getName() const
 }
 
 /**
+ * Returns the type identifier, meant to encapsulate a weakly-typed enumerator.
+ * @return type
+ */
+int GameSelection::getType() const
+{
+  return type;
+}
+
+/**
  * Build the {@link GameSelection} object from the configured builder.
  * @return built object
  */
@@ -43,6 +52,7 @@ GameSelection GameSelection::Builder::build()
   game_selection.description = this->description;
   game_selection.image_path = this->image_path;
   game_selection.name = this->name;
+  game_selection.type = this->type;
 
   return game_selection;
 }
@@ -77,5 +87,16 @@ GameSelection::Builder* GameSelection::Builder::setImagePath(QString image_path)
 GameSelection::Builder* GameSelection::Builder::setName(QString name)
 {
   this->name = name;
+  return this;
+}
+
+/**
+ * Sets the selection type. This should be a unique identifier.
+ * @param type weakly-typed enumerator
+ * @return reference to the builder, for chaining
+ */
+GameSelection::Builder* GameSelection::Builder::setType(int type)
+{
+  this->type = type;
   return this;
 }

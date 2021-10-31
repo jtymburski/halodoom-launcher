@@ -64,6 +64,11 @@ public:
   /* Execute and start a local multiplayer server */
   void startServer();
 
+  /* Execute and start a local multiplayer server and a client connected to that server */
+  void startServerAndClient(const Map &map, const Mode &mode, const QVector<Bot> &bots,
+                            const int max_player_count = 8, const int score_limit = 0,
+                            const int time_limit = 0);
+
   /* Stop a running local multiplayer server, if it exists */
   void stopServer();
 };

@@ -8,9 +8,10 @@
 
 /**
  * Constructor, with just the parent.
+ * @param controller game business logic encapsulation
  * @param parent top level owning widget, for garbage collection
  */
-MultiplayerView::MultiplayerView(QWidget *parent) : QWidget(parent)
+MultiplayerView::MultiplayerView(GameController *controller, QWidget *parent) : QWidget(parent)
 {
   QGridLayout* layout = new QGridLayout(this);
   layout->setMargin(0);
@@ -29,7 +30,7 @@ MultiplayerView::MultiplayerView(QWidget *parent) : QWidget(parent)
   // Stack of views, one to be displayed at a time only
   view_layout = new QStackedLayout();
 
-  view_create = new GameCreateView(this);
+  view_create = new GameCreateView(controller, this);
   view_layout->addWidget(view_create);
 
   view_join = new MultiplayerJoinView(this);

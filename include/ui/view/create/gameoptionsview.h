@@ -12,6 +12,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include "model/gametypes.h"
 #include "ui/view/create/gameselection.h"
 #include "ui/widget/menubutton.h"
 #include "ui/widget/slider.h"
@@ -42,6 +43,11 @@ private:
   QVector<GameSelection> selected_bots;
   QVector<QPushButton*> selected_bot_views;
 
+  /* Sliders */
+  Slider *slider_player_count;
+  Slider *slider_score_limit;
+  Slider *slider_time_limit;
+
 signals:
   /* Finished setting up the game options */
   void configured();
@@ -71,6 +77,19 @@ private slots:
 
   /* View the selected bot in the UI */
   void viewBot(const GameSelection &bot);
+
+public:
+  /* Returns the selected list of bots */
+  QVector<GameSelection> getBots() const;
+
+  /* Returns the player count maximum configuration */
+  int getPlayerCount() const;
+
+  /* Returns the game score limit configuration, in total kills */
+  int getScoreLimit() const;
+
+  /* Returns the time limit configuration, in minutes */
+  int getTimeLimit() const;
 };
 
 #endif // GAMEOPTIONSVIEW_H

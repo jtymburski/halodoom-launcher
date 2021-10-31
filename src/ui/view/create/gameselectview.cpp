@@ -10,7 +10,9 @@
  * Constructor, with just the parent.
  * @param parent top level owning widget, for garbage collection
  */
-GameSelectView::GameSelectView(QWidget *parent) : QWidget(parent)
+GameSelectView::GameSelectView(QWidget *parent)
+              : QWidget(parent),
+                current_selection(GameSelection::Builder().build())
 {
   layout = new QGridLayout(this);
   layout->setColumnStretch(0, 2);
@@ -38,9 +40,21 @@ GameSelectView::GameSelectView(QWidget *parent) : QWidget(parent)
   layout->addWidget(label_description, 5, 4, Qt::AlignTop);
 }
 
+/* ---- PRIVATE SLOT FUNCTIONS ---- */
+
 /**
- * Update the current selection being displayed.
- * @param selection new map properties
+ * Set the current selection, mark that a selection has been made.
+ * @param selection new game choice
+ */
+void GameSelectView::setSelection(const GameSelection &selection)
+{
+  current_selection = selection;
+  emit selected();
+}
+
+/**
+ * Update the active selection being displayed.
+ * @param selection new game choice
  */
 void GameSelectView::viewSelection(const GameSelection &selection)
 {
@@ -51,6 +65,8 @@ void GameSelectView::viewSelection(const GameSelection &selection)
           "border-image:url(" + selection.getImagePath() + ") 0 0 0 0 stretch stretch"
         "}");
 }
+
+/* ---- PROTECTED FUNCTIONS ---- */
 
 /**
  * Creates the full list of all available selections in the UI.
@@ -74,10 +90,10 @@ void GameSelectView::createSelections(const QString &title,
 
   for(auto const &selection : qAsConst(this->selections))
   {
-    MenuButton *button_map = new MenuButton(selection.getName(), 30);
-    connect(button_map, &MenuButton::clicked, this, &GameSelectView::selected);
-    connect(button_map, &MenuButton::hovered, this, [=]() { this->viewSelection(selection); });
-    layout_names->addWidget(button_map);
+    MenuButton *button_choice = new MenuButton(selection.getName(), 30);
+    connect(button_choice, &MenuButton::clicked, this, [=]() { this->setSelection(selection); });
+    connect(button_choice, &MenuButton::hovered, this, [=]() { this->viewSelection(selection); });
+    layout_names->addWidget(button_choice);
   }
 
   layout_names->addSpacerItem(
@@ -85,4 +101,15 @@ void GameSelectView::createSelections(const QString &title,
   layout->addLayout(layout_names, 2, 1);
 
   viewSelection(selections.first());
+}
+
+/* ---- PUBLIC FUNCTIONS ---- */
+
+/**
+ * Returns the last selection that was made by the user in the view.
+ * @return selection choice
+ */
+GameSelection GameSelectView::getSelection() const
+{
+  return current_selection;
 }

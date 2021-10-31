@@ -10,6 +10,7 @@
 #include <QGridLayout>
 #include <QWidget>
 
+#include "game/gamecontroller.h"
 #include "ui/view/create/gamecreateview.h"
 #include "ui/widget/animatedbackground.h"
 #include "ui/widget/pageheader.h"
@@ -20,7 +21,7 @@ class OfflineView : public QWidget
 
 public:
   /* Constructor, with just the parent */
-  OfflineView(QWidget *parent = nullptr);
+  OfflineView(GameController *controller, QWidget *parent = nullptr);
 
 private:
   /* Create new game view */

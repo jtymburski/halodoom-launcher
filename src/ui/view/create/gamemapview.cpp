@@ -19,6 +19,7 @@ GameMapView::GameMapView(QWidget *parent) : GameSelectView(parent)
                             "decomissioned in favor of having the raw storage space")
             ->setImagePath(":/image/map/warehouse.jpg")
             ->setName("Warehouse")
+            ->setType(Map::WAREHOUSE)
             ->build(),
         GameSelection::Builder()
             .setDescription("Beneath the seas of Installation 02 lie a variety of mysterious "
@@ -27,12 +28,14 @@ GameMapView::GameMapView(QWidget *parent) : GameSelectView(parent)
                             "ambience of deep")
             ->setImagePath(":/image/map/submerged.jpg")
             ->setName("Submerged")
+            ->setType(Map::SUBMERGED)
             ->build(),
         GameSelection::Builder()
             .setDescription("Amidst the outskirts of the holy city, in the hall of the "
                             "ancestors, a great heresy brews...")
             ->setImagePath(":/image/map/rebellion.jpg")
             ->setName("Rebellion")
+            ->setType(Map::REBELLION)
             ->build(),
         GameSelection::Builder()
             .setDescription("The former inhabitants of this installation are now one with "
@@ -40,12 +43,14 @@ GameMapView::GameMapView(QWidget *parent) : GameSelectView(parent)
                             "intended, but clearly something went very wrong")
             ->setImagePath(":/image/map/floodgulch.jpg")
             ->setName("Flood Gulch")
+            ->setType(Map::FLOOD_GULCH)
             ->build(),
         GameSelection::Builder()
             .setDescription("In the emptiness of space, this fragment of the past floats "
                             "alone, silent, unnerving")
             ->setImagePath(":/image/map/ghostship.jpg")
             ->setName("Ghost Ship")
+            ->setType(Map::GHOST_SHIP)
             ->build()
   });
 }

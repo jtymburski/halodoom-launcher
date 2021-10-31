@@ -29,11 +29,11 @@ MainDialog::MainDialog(QWidget *parent)
   connect(view_main, SIGNAL(selectOfflineSkirmish()), this, SLOT(viewOfflineSkirmish()));
   view_layout->addWidget(view_main);
 
-  view_multiplayer = new MultiplayerView(this);
+  view_multiplayer = new MultiplayerView(&game_controller, this);
   connect(view_multiplayer, SIGNAL(backClicked()), this, SLOT(viewMain()));
   view_layout->addWidget(view_multiplayer);
 
-  view_offline = new OfflineView(this);
+  view_offline = new OfflineView(&game_controller, this);
   connect(view_offline, SIGNAL(backClicked()), this, SLOT(viewMain()));
   view_layout->addWidget(view_offline);
 }

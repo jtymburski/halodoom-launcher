@@ -6,6 +6,7 @@
 #ifndef GAMEMAPVIEW_H
 #define GAMEMAPVIEW_H
 
+#include "model/gametypes.h"
 #include "ui/view/create/gameselectview.h"
 
 class GameMapView : public GameSelectView

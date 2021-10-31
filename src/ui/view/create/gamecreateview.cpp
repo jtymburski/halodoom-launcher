@@ -5,13 +5,17 @@
  * options that are available.
  */
 #include "ui/view/create/gamecreateview.h"
+#include <QDebug>
 
 /**
  * Constructor, with just the parent.
+ * @param controller game business logic encapsulation
  * @param parent top level owning widget, for garbage collection
  */
-GameCreateView::GameCreateView(QWidget *parent) : QWidget(parent)
+GameCreateView::GameCreateView(GameController *controller, QWidget *parent) : QWidget(parent)
 {
+  this->controller = controller;
+
   view_layout = new QStackedLayout(this);
 
   view_map = new GameMapView(this);
@@ -36,6 +40,17 @@ GameCreateView::GameCreateView(QWidget *parent) : QWidget(parent)
  */
 void GameCreateView::create()
 {
+  const GameSelection map = view_map->getSelection();
+  const GameSelection mode = view_mode->getSelection();
+
+  const QVector<GameSelection> bots = view_options->getBots();
+  QVector<Bot> bot_types;
+  for(int bot_index = 0; bot_index < bots.size(); bot_index++)
+    bot_types.append((Bot) bots.at(bot_index).getType());
+
+  controller->startServerAndClient((Map) map.getType(), (Mode) mode.getType(), bot_types,
+                                   view_options->getPlayerCount(), view_options->getScoreLimit(),
+                                   view_options->getTimeLimit());
 }
 
 /**

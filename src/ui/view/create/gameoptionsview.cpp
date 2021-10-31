@@ -101,15 +101,15 @@ GameOptionsView::GameOptionsView(QWidget *parent) : QWidget(parent)
   // Option Interactive UI (Center Column)
   QVBoxLayout *layout_options = new QVBoxLayout();
 
-  Slider *slider_player_count = new Slider(8, 1, 16, this);
+  slider_player_count = new Slider(8, 1, 16, this);
   connect(slider_player_count, &Slider::valueChanged, this, &GameOptionsView::updatePlayerCount);
   layout_options->addWidget(slider_player_count);
 
-  Slider *slider_time_limit = new Slider(20, 2, 120, this);
+  slider_time_limit = new Slider(20, 2, 120, this);
   connect(slider_time_limit, &Slider::valueChanged, this, &GameOptionsView::updateTimeLimit);
   layout_options->addWidget(slider_time_limit);
 
-  Slider *slider_score_limit = new Slider(50, 1, 500, this);
+  slider_score_limit = new Slider(50, 1, 500, this);
   connect(slider_score_limit, &Slider::valueChanged, this, &GameOptionsView::updateScoreLimit);
   layout_options->addWidget(slider_score_limit);
 
@@ -158,28 +158,33 @@ QVector<GameSelection> GameOptionsView::createAvailableBots()
             .setDescription("Leader of the Code of Silence, favors heavy combat and vehicles")
             ->setImagePath(":/image/player/ramsus.jpg")
             ->setName("Ramsus")
+            ->setType(Bot::RAMSUS)
             ->build(),
         GameSelection::Builder()
             .setDescription("Technician for the Code of Silence, favors stealth and cunning")
             ->setImagePath(":/image/player/avalon.jpg")
             ->setName("Avalon")
+            ->setType(Bot::AVALON)
             ->build(),
         GameSelection::Builder()
             .setDescription("Infiltration specialist for the Code of Silence, she favors "
                             "small arms")
             ->setImagePath(":/image/player/nexiam.jpg")
             ->setName("Nexiam")
+            ->setType(Bot::NEXIAM)
             ->build(),
         GameSelection::Builder()
             .setDescription("Sniper for the Code of Silence. Favors long range combat")
             ->setImagePath(":/image/player/uzziel.jpg")
             ->setName("Uzziel")
+            ->setType(Bot::UZZIEL)
             ->build(),
         GameSelection::Builder()
             .setDescription("Samurai of the Code of Silence, favors Covenant weapons, with "
                             "a particular fondness of the Energy Sword")
             ->setImagePath(":/image/player/zetsui.jpg")
             ->setName("Zetsui")
+            ->setType(Bot::ZETSUI)
             ->build()
   };
 }
@@ -245,4 +250,30 @@ void GameOptionsView::viewBot(const GameSelection &bot)
           "border:0;"
           "border-image:url(" + bot.getImagePath() + ") 0 0 0 0 stretch stretch"
         "}");
+}
+
+/* ---- PUBLIC FUNCTIONS ---- */
+
+/* Returns the selected list of bots */
+QVector<GameSelection> GameOptionsView::getBots() const
+{
+  return selected_bots;
+}
+
+/* Returns the player count maximum configuration */
+int GameOptionsView::getPlayerCount() const
+{
+  return slider_player_count->value();
+}
+
+/* Returns the game score limit configuration, in total kills */
+int GameOptionsView::getScoreLimit() const
+{
+  return slider_score_limit->value();
+}
+
+/* Returns the time limit configuration, in minutes */
+int GameOptionsView::getTimeLimit() const
+{
+  return slider_time_limit->value();
 }

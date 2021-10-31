@@ -23,7 +23,7 @@ class MultiplayerView : public QWidget
 
 public:
   /* Constructor, with just the parent */
-  MultiplayerView(QWidget *parent = nullptr);
+  MultiplayerView(GameController *controller, QWidget *parent = nullptr);
 
 private:
   /* Create new game view */

@@ -26,6 +26,9 @@ private:
   /* Name of the selection, should be relatively short */
   QString name;
 
+  /* Type identifier */
+  int type = -1;
+
 public:
   /* Returns the selection description */
   QString getDescription() const;
@@ -36,6 +39,9 @@ public:
   /* Returns the selection name */
   QString getName() const;
 
+  /* Returns the type identifier, meant to encapsulate a weakly-typed enumerator */
+  int getType() const;
+
   /* Builder nested class for constructing the selection immutable object */
   class Builder
   {
@@ -43,12 +49,14 @@ public:
     QString description;
     QString image_path;
     QString name;
+    int type;
 
   public:
     GameSelection build();
     Builder* setDescription(QString description);
     Builder* setImagePath(QString image_path);
     Builder* setName(QString name);
+    Builder* setType(int type);
   };
 };
 
