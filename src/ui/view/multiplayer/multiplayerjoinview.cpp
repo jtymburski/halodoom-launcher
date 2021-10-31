@@ -13,15 +13,15 @@
 MultiplayerJoinView::MultiplayerJoinView(QWidget *parent) : QWidget(parent)
 {
   QGridLayout *layout = new QGridLayout(this);
-  layout->setColumnMinimumWidth(0, 100);
-  layout->setColumnStretch(1, 2);
-  layout->setColumnMinimumWidth(2, 50);
-  layout->setColumnStretch(3, 1);
-  layout->setColumnMinimumWidth(4, 100);
-  layout->setRowMinimumHeight(0, 100);
-  layout->setRowStretch(1, 1);
-  layout->setRowStretch(3, 1);
-  layout->setRowMinimumHeight(5, 100);
+  layout->setColumnStretch(0, 2);
+  layout->setColumnStretch(1, 12);
+  layout->setColumnStretch(2, 1);
+  layout->setColumnStretch(3, 6);
+  layout->setColumnStretch(4, 1);
+  layout->setRowStretch(0, 1);
+  layout->setRowStretch(1, 4);
+  layout->setRowStretch(3, 4);
+  layout->setRowStretch(5, 1);
 
   // Table view
   QGridLayout *table_layout = new QGridLayout();
@@ -35,28 +35,29 @@ MultiplayerJoinView::MultiplayerJoinView(QWidget *parent) : QWidget(parent)
   TextView *header_map = new TextView("Map", QColorConstants::White, 28,
                                       QSize(15, 0), this);
   table_layout->addWidget(header_map, 0, 1);
-  TextView *header_mode = new TextView("Game Mode", QColorConstants::White, 28,
+  TextView *header_mode = new TextView("Mode", QColorConstants::White, 28,
                                         QSize(15, 0), this);
   table_layout->addWidget(header_mode, 0, 2);
-  TextView *header_count = new TextView("Player Count", QColorConstants::White, 28,
+  TextView *header_count = new TextView("Players", QColorConstants::White, 28,
                                         QSize(15, 0), this);
   table_layout->addWidget(header_count, 0, 3);
 
   // Table rows
-  for(int row = 1; row < 15; row++)
+  for(int row = 1; row < 12; row++)
   {
-    MenuButton *button_row = new MenuButton("", 24, this);
+    MenuButton *button_row = new MenuButton("", 20, this);
     button_row->setBackgroundFilled(true);
     table_layout->addWidget(button_row, row, 0, 1, 4);
 
     for(int col = 0; col < 4; col++)
     {
-      TextView *cell = new TextView("-", QColorConstants::White, 24,
+      TextView *cell = new TextView("-", QColorConstants::White, 20,
                                     QSize(15, 0), button_row);
       cell->setAttribute(Qt::WA_TransparentForMouseEvents, true);
       table_layout->addWidget(cell, row, col);
     }
   }
+  table_layout->setRowStretch(12, 1);
   layout->addLayout(table_layout, 1, 1, 4, 1);
 
   // Selected game details
