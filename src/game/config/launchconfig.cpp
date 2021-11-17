@@ -11,6 +11,7 @@ const QString LaunchConfig::PARAM_CONNECTION_LIMIT = QStringLiteral("-host");
 const QString LaunchConfig::PARAM_BASE_WAD = QStringLiteral("-iwad");
 const QString LaunchConfig::PARAM_MOD_PK3 = QStringLiteral("-file");
 const QString LaunchConfig::PARAM_SERVER_ADDR = QStringLiteral("-connect");
+const QString LaunchConfig::PARAM_SERVER_PORT = QStringLiteral("-port");
 
 /* Destructor function */
 LaunchConfig::~LaunchConfig()
@@ -74,6 +75,15 @@ QString LaunchConfig::getModConfigFilepath() const
 QString LaunchConfig::getServerAddress() const
 {
   return server_address;
+}
+
+/**
+ * Returns the server IPv4 port for connecting as a client. If empty, the client should use
+ * the default port and not set anything custom through the command line interface.
+ */
+QString LaunchConfig::getServerPort() const
+{
+  return server_port;
 }
 
 /**
@@ -195,6 +205,8 @@ QList<Argument> LaunchConfig::getClientArguments() const
   QMap<QString, Argument> arguments = getArgumentsMap(arguments_client);
 
   arguments.insert(PARAM_SERVER_ADDR, Argument(PARAM_SERVER_ADDR, getServerAddress()));
+  if(!server_port.isEmpty())
+    arguments.insert(PARAM_SERVER_PORT, Argument(PARAM_SERVER_PORT, getServerPort()));
 
   return arguments.values();
 }
@@ -262,6 +274,14 @@ void LaunchConfig::insertServerArguments(const QList<Argument> &arguments)
 void LaunchConfig::setServerAddress(QString address)
 {
   server_address = address;
+}
+
+/**
+ * Sets the server IPv4 {@param port} for connecting as a client. Set to blank to use default.
+ */
+void LaunchConfig::setServerPort(QString port)
+{
+  server_port = port;
 }
 
 /**

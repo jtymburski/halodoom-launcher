@@ -121,6 +121,18 @@ void GameController::startClient(QString address)
 }
 
 /**
+ * Execute and start a multiplayer client, with both an address and a port.
+ * @throws std::invalid_parameter if the launch config is misconfigured
+ */
+void GameController::startClient(QString address, QString port)
+{
+  loadConfig();
+  launch_config->setServerAddress(address);
+  launch_config->setServerPort(port);
+  startGameProcess(launch_config->getClientArguments());
+}
+
+/**
  * Execute and start a local multiplayer server.
  * @throws std::invalid_parameter if the launch config is misconfigured
  */

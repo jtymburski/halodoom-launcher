@@ -5,14 +5,16 @@
  * to search and can be joined.
  */
 #include "ui/view/multiplayer/multiplayerjoinview.h"
-#include <QDebug>
 
 /**
  * Constructor, with just the parent.
  * @param parent top level owning widget, for garbage collection
  */
-MultiplayerJoinView::MultiplayerJoinView(QWidget *parent) : QWidget(parent)
+MultiplayerJoinView::MultiplayerJoinView(GameController *controller, QWidget *parent)
+                   : QWidget(parent)
 {
+  this->controller = controller;
+
   QGridLayout *layout = new QGridLayout(this);
   layout->setColumnStretch(0, 2);
   layout->setColumnStretch(1, 12);
@@ -48,43 +50,44 @@ MultiplayerJoinView::MultiplayerJoinView(QWidget *parent) : QWidget(parent)
   {
     MenuButton *button_row = new MenuButton("", 20, this);
     button_row->setBackgroundFilled(true);
+    connect(button_row, &MenuButton::clicked, this, [=]() { this->selectServer(row - 1); });
     table_layout->addWidget(button_row, row, 0, 1, 4);
 
+    QVector<TextView*> view_table_row;
     for(int col = 0; col < 4; col++)
     {
       TextView *cell = new TextView("-", QColorConstants::White, 20,
                                     QSize(15, 0), button_row);
       cell->setAttribute(Qt::WA_TransparentForMouseEvents, true);
       table_layout->addWidget(cell, row, col);
+      view_table_row.append(cell);
     }
+    view_table.append(view_table_row);
   }
   table_layout->setRowStretch(12, 1);
   layout->addLayout(table_layout, 1, 1, 4, 1);
 
   // Selected game details
-  QLabel *label_game_image = new QLabel(this);
+  label_game_image = new QLabel(this);
   label_game_image->setStyleSheet(
         "QLabel {"
           "border:0;"
-          "border-image:url(:/image/map/rebellion.jpg) 0 0 0 0 stretch stretch"
+          "border-image:url() 0 0 0 0 stretch stretch"
         "}");
   layout->addWidget(label_game_image, 1, 3);
 
-  TextView *label_game_title = new TextView("Rebellion SWAT", QColor("#68c4ff"), 34,
-                                            QSize(0, 0), this);
+  label_game_title = new TextView("", QColor("#68c4ff"), 34,
+                                  QSize(0, 0), this);
   layout->addWidget(label_game_title, 2, 3);
 
-  TextView *label_game_description = new TextView("Amidst the outskirts of the holy city, in the "
-                                                  "hall of the ancestors, a great heresy brews..."
-                                                  "\n\n"
-                                                  "Aim for the head! Slayer with no shield, "
-                                                  "radar, or ordinance.", QColorConstants::White,
-                                                  20, QSize(0, 0), this);
+  label_game_description = new TextView("", QColorConstants::White,
+                                        20, QSize(0, 0), this);
   label_game_description->setWordWrap(true);
   layout->addWidget(label_game_description, 3, 3, Qt::AlignTop);
 
   // Join Button
   MenuButton *button_join = new MenuButton("Join →", 42, this);
+  connect(button_join, &MenuButton::clicked, this, &MultiplayerJoinView::joinServer);
   layout->addWidget(button_join, 4, 3, Qt::AlignBottom | Qt::AlignRight);
 
   // Network API server fetch
@@ -93,17 +96,85 @@ MultiplayerJoinView::MultiplayerJoinView(QWidget *parent) : QWidget(parent)
   connect(network_api, &NetworkAPI::serversReceived, this, &MultiplayerJoinView::updateServers);
 }
 
+/* Update the server table view */
+void MultiplayerJoinView::updateServerTableView()
+{
+  for(int row = 0; row < view_table.size(); row++)
+  {
+    for(int col = 0; col < view_table.at(row).size(); col++)
+    {
+      TextView *cell = view_table.at(row).at(col);
+
+      if(row < active_games.size())
+      {
+        const MultiplayerGame &game = active_games.at(row);
+        switch(col)
+        {
+          case 0:
+            cell->setText(game.getServer().getName());
+            break;
+          case 1:
+            cell->setText(game.getMap().getName());
+            break;
+          case 2:
+            cell->setText(game.getMode().getName());
+            break;
+          default:
+            cell->setText("-");
+        }
+      }
+      else
+      {
+        cell->setText("-");
+      }
+    }
+  }
+}
+
+/* Join the selected server */
+void MultiplayerJoinView::joinServer()
+{
+  QString server_addr = selected_game.getServer().getAddress();
+  QString server_port = selected_game.getServer().getPort();
+  if(!server_addr.isEmpty() && !server_port.isEmpty())
+    controller->startClient(server_addr, server_port);
+}
+
+/* Sets the currently selected server */
+void MultiplayerJoinView::selectServer(int row)
+{
+  // Cache the current selected game
+  if(row >= 0 && row < active_games.size())
+    selected_game = active_games.at(row);
+  else
+    selected_game = MultiplayerGame::Builder().build();
+
+  // Update the UI
+  label_game_description->setText(selected_game.getMap().getDescription() + "\n\n" +
+                                  selected_game.getMode().getDescription());
+  label_game_image->setStyleSheet(
+        "QLabel {"
+          "border:0;"
+          "border-image:url(" + selected_game.getMap().getImagePath() + ") 0 0 0 0 stretch stretch"
+        "}");
+  label_game_title->setText(selected_game.getMap().getName() + " " +
+                            selected_game.getMode().getName());
+}
+
 /* Update the list of servers */
 void MultiplayerJoinView::updateServers(const QVector<RemoteServer> &servers)
 {
-  qDebug() << "updateServers()";
+  active_games.clear();
+
   for (const RemoteServer &server : servers)
   {
-    qDebug() << "id=" << server.getId()
-             << ", name=" << server.getName()
-             << ", address=" << server.getAddress()
-             << ", port=" << server.getPort()
-             << ", map=" << server.getMapId()
-             << ", mode=" << server.getModeId();
+    active_games.append(MultiplayerGame::Builder()
+                        .setMap(ui_database.getMap(server.getMapId()))
+                        ->setMode(ui_database.getMode(server.getModeId()))
+                        ->setServer(server)
+                        ->build());
   }
+
+  updateServerTableView();
+  selectServer(0);
 }

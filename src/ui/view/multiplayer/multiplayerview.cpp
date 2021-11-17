@@ -33,7 +33,7 @@ MultiplayerView::MultiplayerView(GameController *controller, QWidget *parent) : 
   view_create = new GameCreateView(controller, this);
   view_layout->addWidget(view_create);
 
-  view_join = new MultiplayerJoinView(this);
+  view_join = new MultiplayerJoinView(controller, this);
   view_layout->addWidget(view_join);
 
   view_main = new MultiplayerMainView(this);

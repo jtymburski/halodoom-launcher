@@ -60,6 +60,7 @@ public:
 
   /* Execute and start a multiplayer client */
   void startClient(QString address);
+  void startClient(QString address, QString port);
 
   /* Execute and start a local multiplayer server */
   void startServer();

@@ -21,6 +21,7 @@ private:
 
   /* Server network address, for connecting as a client */
   QString server_address;
+  QString server_port;
 
   /* Server connection limit (# of clients that can connect when hosting) */
   uint server_connection_limit = DEFAULT_CONNECTION_LIMIT;
@@ -37,6 +38,7 @@ private:
   const static QString PARAM_BASE_WAD;
   const static QString PARAM_MOD_PK3;
   const static QString PARAM_SERVER_ADDR;
+  const static QString PARAM_SERVER_PORT;
 
 private:
   /* Returns the base mapping of arguments, common for all game types */
@@ -53,6 +55,7 @@ private:
 
   /* Returns the server IPv4 address for connecting as a client */
   QString getServerAddress() const;
+  QString getServerPort() const;
 
   /* Returns the server connection limits for clients when hosting */
   uint getServerConnectionLimit() const;
@@ -106,6 +109,7 @@ public:
 
   /* Sets the server IPv4 address for connecting as a client */
   void setServerAddress(QString address);
+  void setServerPort(QString port);
 
   /* Sets the server connection limits for clients when hosting */
   void setServerConnectionLimit(uint limit);
