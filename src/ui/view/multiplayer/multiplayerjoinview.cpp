@@ -5,6 +5,7 @@
  * to search and can be joined.
  */
 #include "ui/view/multiplayer/multiplayerjoinview.h"
+#include <QDebug>
 
 /**
  * Constructor, with just the parent.
@@ -85,4 +86,24 @@ MultiplayerJoinView::MultiplayerJoinView(QWidget *parent) : QWidget(parent)
   // Join Button
   MenuButton *button_join = new MenuButton("Join →", 42, this);
   layout->addWidget(button_join, 4, 3, Qt::AlignBottom | Qt::AlignRight);
+
+  // Network API server fetch
+  network_api = new NetworkAPI(this);
+  network_api->getConfig();
+  connect(network_api, &NetworkAPI::serversReceived, this, &MultiplayerJoinView::updateServers);
+}
+
+/* Update the list of servers */
+void MultiplayerJoinView::updateServers(const QVector<RemoteServer> &servers)
+{
+  qDebug() << "updateServers()";
+  for (const RemoteServer &server : servers)
+  {
+    qDebug() << "id=" << server.getId()
+             << ", name=" << server.getName()
+             << ", address=" << server.getAddress()
+             << ", port=" << server.getPort()
+             << ", map=" << server.getMapId()
+             << ", mode=" << server.getModeId();
+  }
 }

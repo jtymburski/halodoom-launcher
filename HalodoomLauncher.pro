@@ -14,13 +14,17 @@ SOURCES += \
     src/game/gamecontroller.cpp \
     src/main.cpp \
     src/model/argument.cpp \
+    src/model/remoteasset.cpp \
+    src/model/remoteserver.cpp \
+    src/network/networkapi.cpp \
     src/network/networkinfo.cpp \
     src/ui/maindialog.cpp \
+    src/ui/model/database.cpp \
+    src/ui/model/selection.cpp \
     src/ui/view/create/gamecreateview.cpp \
     src/ui/view/create/gamemapview.cpp \
     src/ui/view/create/gamemodeview.cpp \
     src/ui/view/create/gameoptionsview.cpp \
-    src/ui/view/create/gameselection.cpp \
     src/ui/view/create/gameselectview.cpp \
     src/ui/view/mainview.cpp \
     src/ui/view/multiplayer/multiplayerjoinview.cpp \
@@ -44,13 +48,17 @@ HEADERS += \
     include/game/gamecontroller.h \
     include/model/argument.h \
     include/model/gametypes.h \
+    include/model/remoteasset.h \
+    include/model/remoteserver.h \
+    include/network/networkapi.h \
     include/network/networkinfo.h \
     include/ui/maindialog.h \
+    include/ui/model/database.h \
+    include/ui/model/selection.h \
     include/ui/view/create/gamecreateview.h \
     include/ui/view/create/gamemapview.h \
     include/ui/view/create/gamemodeview.h \
     include/ui/view/create/gameoptionsview.h \
-    include/ui/view/create/gameselection.h \
     include/ui/view/create/gameselectview.h \
     include/ui/view/mainview.h \
     include/ui/view/multiplayer/multiplayerjoinview.h \

@@ -6,7 +6,7 @@
 #ifndef GAMEMODEVIEW_H
 #define GAMEMODEVIEW_H
 
-#include "model/gametypes.h"
+#include "ui/model/database.h"
 #include "ui/view/create/gameselectview.h"
 
 class GameModeView : public GameSelectView

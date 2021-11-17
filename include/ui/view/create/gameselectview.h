@@ -9,11 +9,12 @@
 
 #include <QGridLayout>
 #include <QLabel>
+#include <QList>
 #include <QVBoxLayout>
 #include <QVector>
 #include <QWidget>
 
-#include "ui/view/create/gameselection.h"
+#include "ui/model/selection.h"
 #include "ui/widget/menubutton.h"
 #include "ui/widget/textview.h"
 
@@ -27,7 +28,7 @@ public:
 
 private:
   /* Last selected game choice */
-  GameSelection current_selection;
+  Selection current_selection;
 
   /* UI elements for the currently displayed selection */
   QLabel *label_description;
@@ -36,7 +37,7 @@ private:
   QVBoxLayout *layout_names;
 
   /* List of all configured selection options */
-  QVector<GameSelection> selections;
+  QVector<Selection> selections;
 
 signals:
   /* A selection has been made */
@@ -44,18 +45,18 @@ signals:
 
 private slots:
   /* Set the current selection, mark that a selection has been made */
-  void setSelection(const GameSelection &selection);
+  void setSelection(const Selection &selection);
 
   /* Change the active selection being displayed */
-  void viewSelection(const GameSelection &selection);
+  void viewSelection(const Selection &selection);
 
 protected:
   /* Creates the full list of all available selections in the UI */
-  void createSelections(const QString &title, const QVector<GameSelection> &selections);
+  void createSelections(const QString &title, const QList<Selection> &selections);
 
 public:
   /* Returns the last selection that was made */
-  GameSelection getSelection() const;
+  Selection getSelection() const;
 };
 
 #endif // GAMESELECTVIEW_H

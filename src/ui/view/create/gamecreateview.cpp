@@ -40,10 +40,10 @@ GameCreateView::GameCreateView(GameController *controller, QWidget *parent) : QW
  */
 void GameCreateView::create()
 {
-  const GameSelection map = view_map->getSelection();
-  const GameSelection mode = view_mode->getSelection();
+  const Selection map = view_map->getSelection();
+  const Selection mode = view_mode->getSelection();
 
-  const QVector<GameSelection> bots = view_options->getBots();
+  const QVector<Selection> bots = view_options->getBots();
   QVector<Bot> bot_types;
   for(int bot_index = 0; bot_index < bots.size(); bot_index++)
     bot_types.append((Bot) bots.at(bot_index).getType());

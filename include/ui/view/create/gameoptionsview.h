@@ -13,7 +13,7 @@
 #include <QWidget>
 
 #include "model/gametypes.h"
-#include "ui/view/create/gameselection.h"
+#include "ui/model/selection.h"
 #include "ui/widget/menubutton.h"
 #include "ui/widget/slider.h"
 #include "ui/widget/textview.h"
@@ -28,7 +28,7 @@ public:
 
 private:
   /* List of all available bots */
-  QVector<GameSelection> available_bots;
+  QVector<Selection> available_bots;
 
   /* Active bot information */
   TextView *label_bot_description;
@@ -40,7 +40,7 @@ private:
   TextView *label_time_limit_value;
 
   /* List of selected bots and the UI views */
-  QVector<GameSelection> selected_bots;
+  QVector<Selection> selected_bots;
   QVector<QPushButton*> selected_bot_views;
 
   /* Sliders */
@@ -54,14 +54,14 @@ signals:
 
 private:
   /* Creates the set of available bots */
-  QVector<GameSelection> createAvailableBots();
+  QVector<Selection> createAvailableBots();
 
   /* Update the selected bots list in the UI */
   void updateSelectedBots();
 
 private slots:
   /* Add the bot in the UI to the game configuration */
-  void addBot(const GameSelection &bot);
+  void addBot(const Selection &bot);
 
   /* Remove a bot from the game configuration */
   void removeBot(int index);
@@ -76,11 +76,11 @@ private slots:
   void updateTimeLimit(int time_limit);
 
   /* View the selected bot in the UI */
-  void viewBot(const GameSelection &bot);
+  void viewBot(const Selection &bot);
 
 public:
   /* Returns the selected list of bots */
-  QVector<GameSelection> getBots() const;
+  QVector<Selection> getBots() const;
 
   /* Returns the player count maximum configuration */
   int getPlayerCount() const;

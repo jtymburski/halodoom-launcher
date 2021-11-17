@@ -1,21 +1,21 @@
 /**
- * @class GameSelection
+ * @class Selection
  *
  * Single selection properties for a rendered game option.
  */
-#ifndef GAMESELECTION_H
-#define GAMESELECTION_H
+#ifndef SELECTION_H
+#define SELECTION_H
 
 #include <QString>
 
-class GameSelection
+class Selection
 {
 public:
   class Builder;
 
 private:
   /* Private blank constructor, use {@link Builder} */
-  GameSelection() = default;
+  Selection() = default;
 
   /* Description string, can be multiple sentences */
   QString description;
@@ -52,7 +52,7 @@ public:
     int type;
 
   public:
-    GameSelection build();
+    Selection build();
     Builder* setDescription(QString description);
     Builder* setImagePath(QString image_path);
     Builder* setName(QString name);
@@ -60,4 +60,4 @@ public:
   };
 };
 
-#endif // GAMESELECTION_H
+#endif // SELECTION_H

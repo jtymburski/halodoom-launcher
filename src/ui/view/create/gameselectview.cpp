@@ -12,7 +12,7 @@
  */
 GameSelectView::GameSelectView(QWidget *parent)
               : QWidget(parent),
-                current_selection(GameSelection::Builder().build())
+                current_selection(Selection::Builder().build())
 {
   layout = new QGridLayout(this);
   layout->setColumnStretch(0, 2);
@@ -46,7 +46,7 @@ GameSelectView::GameSelectView(QWidget *parent)
  * Set the current selection, mark that a selection has been made.
  * @param selection new game choice
  */
-void GameSelectView::setSelection(const GameSelection &selection)
+void GameSelectView::setSelection(const Selection &selection)
 {
   current_selection = selection;
   emit selected();
@@ -56,7 +56,7 @@ void GameSelectView::setSelection(const GameSelection &selection)
  * Update the active selection being displayed.
  * @param selection new game choice
  */
-void GameSelectView::viewSelection(const GameSelection &selection)
+void GameSelectView::viewSelection(const Selection &selection)
 {
   label_description->setText(selection.getDescription());
   label_image->setStyleSheet(
@@ -74,9 +74,9 @@ void GameSelectView::viewSelection(const GameSelection &selection)
  * @param selections list of selections. Must not be empty
  */
 void GameSelectView::createSelections(const QString &title,
-                                      const QVector<GameSelection> &selections)
+                                      const QList<Selection> &selections)
 {
-  this->selections = selections;
+  this->selections = QVector<Selection>::fromList(selections);
 
   // UI
   layout->removeItem(layout_names);
@@ -109,7 +109,7 @@ void GameSelectView::createSelections(const QString &title,
  * Returns the last selection that was made by the user in the view.
  * @return selection choice
  */
-GameSelection GameSelectView::getSelection() const
+Selection GameSelectView::getSelection() const
 {
   return current_selection;
 }

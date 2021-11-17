@@ -1,15 +1,15 @@
 /**
- * @class GameSelection
+ * @class Selection
  *
  * Single selection properties for a rendered game option.
  */
-#include "ui/view/create/gameselection.h"
+#include "ui/model/selection.h"
 
 /**
  * Returns the selection description. It can be multiple sentences.
  * @return description
  */
-QString GameSelection::getDescription() const
+QString Selection::getDescription() const
 {
   return description;
 }
@@ -18,7 +18,7 @@ QString GameSelection::getDescription() const
  * Returns the selection image. It is the assigned image data to render.
  * @return image
  */
-QString GameSelection::getImagePath() const
+QString Selection::getImagePath() const
 {
   return image_path;
 }
@@ -27,7 +27,7 @@ QString GameSelection::getImagePath() const
  * Returns the selection name. It should be relatively short.
  * @return name
  */
-QString GameSelection::getName() const
+QString Selection::getName() const
 {
   return name;
 }
@@ -36,7 +36,7 @@ QString GameSelection::getName() const
  * Returns the type identifier, meant to encapsulate a weakly-typed enumerator.
  * @return type
  */
-int GameSelection::getType() const
+int Selection::getType() const
 {
   return type;
 }
@@ -45,9 +45,9 @@ int GameSelection::getType() const
  * Build the {@link GameSelection} object from the configured builder.
  * @return built object
  */
-GameSelection GameSelection::Builder::build()
+Selection Selection::Builder::build()
 {
-  GameSelection game_selection;
+  Selection game_selection;
 
   game_selection.description = this->description;
   game_selection.image_path = this->image_path;
@@ -62,7 +62,7 @@ GameSelection GameSelection::Builder::build()
  * @param description string
  * @return reference to the builder, for chaining
  */
-GameSelection::Builder* GameSelection::Builder::setDescription(QString description)
+Selection::Builder* Selection::Builder::setDescription(QString description)
 {
   this->description = description;
   return this;
@@ -73,7 +73,7 @@ GameSelection::Builder* GameSelection::Builder::setDescription(QString descripti
  * @param image_path path of a valid image available
  * @return reference to the builder, for chaining
  */
-GameSelection::Builder* GameSelection::Builder::setImagePath(QString image_path)
+Selection::Builder* Selection::Builder::setImagePath(QString image_path)
 {
   this->image_path = image_path;
   return this;
@@ -84,18 +84,19 @@ GameSelection::Builder* GameSelection::Builder::setImagePath(QString image_path)
  * @param name string
  * @return reference to the builder, for chaining
  */
-GameSelection::Builder* GameSelection::Builder::setName(QString name)
+Selection::Builder* Selection::Builder::setName(QString name)
 {
   this->name = name;
   return this;
 }
+
 
 /**
  * Sets the selection type. This should be a unique identifier.
  * @param type weakly-typed enumerator
  * @return reference to the builder, for chaining
  */
-GameSelection::Builder* GameSelection::Builder::setType(int type)
+Selection::Builder* Selection::Builder::setType(int type)
 {
   this->type = type;
   return this;

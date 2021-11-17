@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QWidget>
 
+#include "network/networkapi.h"
 #include "ui/widget/menubutton.h"
 #include "ui/widget/textview.h"
 
@@ -21,6 +22,14 @@ class MultiplayerJoinView : public QWidget
 public:
   /* Constructor, with just the parent */
   MultiplayerJoinView(QWidget *parent = nullptr);
+
+private:
+  /* Network API interface */
+  NetworkAPI *network_api;
+
+private slots:
+  /* Update the list of servers */
+  void updateServers(const QVector<RemoteServer> &servers);
 };
 
 #endif // MULTIPLAYERJOINVIEW_H

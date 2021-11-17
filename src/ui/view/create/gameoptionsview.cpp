@@ -151,35 +151,35 @@ GameOptionsView::GameOptionsView(QWidget *parent) : QWidget(parent)
 /* ---- PRIVATE FUNCTIONS ---- */
 
 /* Creates the set of available bots */
-QVector<GameSelection> GameOptionsView::createAvailableBots()
+QVector<Selection> GameOptionsView::createAvailableBots()
 {
-  return QVector<GameSelection> {
-        GameSelection::Builder()
+  return QVector<Selection> {
+        Selection::Builder()
             .setDescription("Leader of the Code of Silence, favors heavy combat and vehicles")
             ->setImagePath(":/image/player/ramsus.jpg")
             ->setName("Ramsus")
             ->setType(Bot::RAMSUS)
             ->build(),
-        GameSelection::Builder()
+        Selection::Builder()
             .setDescription("Technician for the Code of Silence, favors stealth and cunning")
             ->setImagePath(":/image/player/avalon.jpg")
             ->setName("Avalon")
             ->setType(Bot::AVALON)
             ->build(),
-        GameSelection::Builder()
+        Selection::Builder()
             .setDescription("Infiltration specialist for the Code of Silence, she favors "
                             "small arms")
             ->setImagePath(":/image/player/nexiam.jpg")
             ->setName("Nexiam")
             ->setType(Bot::NEXIAM)
             ->build(),
-        GameSelection::Builder()
+        Selection::Builder()
             .setDescription("Sniper for the Code of Silence. Favors long range combat")
             ->setImagePath(":/image/player/uzziel.jpg")
             ->setName("Uzziel")
             ->setType(Bot::UZZIEL)
             ->build(),
-        GameSelection::Builder()
+        Selection::Builder()
             .setDescription("Samurai of the Code of Silence, favors Covenant weapons, with "
                             "a particular fondness of the Energy Sword")
             ->setImagePath(":/image/player/zetsui.jpg")
@@ -204,7 +204,7 @@ void GameOptionsView::updateSelectedBots()
 /* ---- PRIVATE SLOT FUNCTIONS ---- */
 
 /* Add the bot in the UI to the game configuration */
-void GameOptionsView::addBot(const GameSelection &bot)
+void GameOptionsView::addBot(const Selection &bot)
 {
   if(selected_bots.size() < selected_bot_views.size())
   {
@@ -242,7 +242,7 @@ void GameOptionsView::updateTimeLimit(int time_limit)
 }
 
 /* View the selected bot in the UI */
-void GameOptionsView::viewBot(const GameSelection &bot)
+void GameOptionsView::viewBot(const Selection &bot)
 {
   label_bot_description->setText(bot.getDescription());
   label_bot_image->setStyleSheet(
@@ -255,7 +255,7 @@ void GameOptionsView::viewBot(const GameSelection &bot)
 /* ---- PUBLIC FUNCTIONS ---- */
 
 /* Returns the selected list of bots */
-QVector<GameSelection> GameOptionsView::getBots() const
+QVector<Selection> GameOptionsView::getBots() const
 {
   return selected_bots;
 }

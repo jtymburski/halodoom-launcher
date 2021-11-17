@@ -11,46 +11,6 @@
  */
 GameMapView::GameMapView(QWidget *parent) : GameSelectView(parent)
 {
-  createSelections("Choose Map", QVector<GameSelection> {
-        GameSelection::Builder()
-            .setDescription("Lethbridge Industrial once operated out of several small "
-                            "facilities like this for the design and manufacture of their "
-                            "experimental armor and weaponry. Most of these sites were "
-                            "decomissioned in favor of having the raw storage space")
-            ->setImagePath(":/image/map/warehouse.jpg")
-            ->setName("Warehouse")
-            ->setType(Map::WAREHOUSE)
-            ->build(),
-        GameSelection::Builder()
-            .setDescription("Beneath the seas of Installation 02 lie a variety of mysterious "
-                            "Forerunner structures, echoes of memories long since past "
-                            "reverberate off of these monolithic walls, mingling with the "
-                            "ambience of deep")
-            ->setImagePath(":/image/map/submerged.jpg")
-            ->setName("Submerged")
-            ->setType(Map::SUBMERGED)
-            ->build(),
-        GameSelection::Builder()
-            .setDescription("Amidst the outskirts of the holy city, in the hall of the "
-                            "ancestors, a great heresy brews...")
-            ->setImagePath(":/image/map/rebellion.jpg")
-            ->setName("Rebellion")
-            ->setType(Map::REBELLION)
-            ->build(),
-        GameSelection::Builder()
-            .setDescription("The former inhabitants of this installation are now one with "
-                            "it's structures. Eradication protocols were activated as "
-                            "intended, but clearly something went very wrong")
-            ->setImagePath(":/image/map/floodgulch.jpg")
-            ->setName("Flood Gulch")
-            ->setType(Map::FLOOD_GULCH)
-            ->build(),
-        GameSelection::Builder()
-            .setDescription("In the emptiness of space, this fragment of the past floats "
-                            "alone, silent, unnerving")
-            ->setImagePath(":/image/map/ghostship.jpg")
-            ->setName("Ghost Ship")
-            ->setType(Map::GHOST_SHIP)
-            ->build()
-  });
+  Database ui_database;
+  createSelections("Choose Map", ui_database.getMaps());
 }
