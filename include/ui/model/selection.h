@@ -29,6 +29,9 @@ private:
   /* Type identifier */
   int type = -1;
 
+  /* Loadout identifier */
+  int loadout = -1;
+
 public:
   /* Returns the selection description */
   QString getDescription() const;
@@ -42,6 +45,9 @@ public:
   /* Returns the type identifier, meant to encapsulate a weakly-typed enumerator */
   int getType() const;
 
+  /* Returns the loadout identifier, meant to encapsulate a weakly-typed enumerator */
+  int getLoadOut() const;
+
   /* Builder nested class for constructing the selection immutable object */
   class Builder
   {
@@ -50,6 +56,7 @@ public:
     QString image_path;
     QString name;
     int type;
+    int loadout;
 
   public:
     Selection build();
@@ -57,6 +64,7 @@ public:
     Builder* setImagePath(QString image_path);
     Builder* setName(QString name);
     Builder* setType(int type);
+    Builder* setLoadout(int loadout);
   };
 };
 

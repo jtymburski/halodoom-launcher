@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QVector>
 #include <QWidget>
+#include <QColor>
 
 #include "game/gamecontroller.h"
 #include "network/networkapi.h"

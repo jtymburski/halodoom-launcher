@@ -10,6 +10,9 @@
 #include "model/argument.h"
 #include "model/gametypes.h"
 
+#include <QFile>
+#include <QTextStream>
+
 class ArgumentTranslator
 {
 private:
@@ -26,6 +29,9 @@ public:
   /* Translate game mode type to argument */
   Argument mode(const Mode &mode);
 
+  /* Translate loadout to argument */
+  Argument loadOut(const LoadOut &loadout);
+
   /* Translate max player count to argument */
   Argument playerCount(int count);
 
@@ -34,6 +40,12 @@ public:
 
   /* Translate game time limit to argument */
   Argument timeLimit(int limit);
+
+  /* Translate game timescore limit to argument */
+  Argument timeScoreLimit(int limit);
+
+  /* Translate team configuration to argument */
+  Argument teamGame(int team);
 
   /* Converts a list of arguments to a serialized string list */
   QStringList toStringList(const QList<Argument> &arguments);

@@ -16,17 +16,39 @@ NetworkAPI::NetworkAPI(QObject *parent) : QObject(parent)
 {
   this->network_manager = new QNetworkAccessManager(parent);
 
-  this->map_to_id.insert("floodgulch", Map::FLOOD_GULCH);
-  this->map_to_id.insert("ghostship", Map::GHOST_SHIP);
-  this->map_to_id.insert("rebellion", Map::REBELLION);
-  this->map_to_id.insert("submerged", Map::SUBMERGED);
+  this->map_to_id.insert("lockup", Map::LOCKUP);
   this->map_to_id.insert("warehouse", Map::WAREHOUSE);
+  this->map_to_id.insert("submerged", Map::SUBMERGED);
+  this->map_to_id.insert("rebellion", Map::REBELLION);
+  this->map_to_id.insert("ghostship", Map::GHOSTSHIP);
+    this->map_to_id.insert("liminal", Map::LIMINAL);
+    this->map_to_id.insert("flood_gulch", Map::FLOOD_GULCH);
+    this->map_to_id.insert("verdant", Map::VERDANT);
+    this->map_to_id.insert("terminus", Map::TERMINUS);
+    this->map_to_id.insert("schism", Map::SCHISM);
+    this->map_to_id.insert("threshold", Map::THRESHOLD);
+    this->map_to_id.insert("trigate", Map::TRIGATE);
+    this->map_to_id.insert("infinite", Map::INFINITE);
 
-  this->mode_to_id.insert("fiesta", Mode::FIESTA);
   this->mode_to_id.insert("slayer", Mode::SLAYER);
-  this->mode_to_id.insert("shottysnipers", Mode::SHOTTY_SHIPERS);
+  this->mode_to_id.insert("oddball", Mode::ODDBALL);
+  this->mode_to_id.insert("kingofthehill", Mode::KINGOFTHEHILL);
+  this->mode_to_id.insert("juggernaut", Mode::JUGGERNAUT);
+  this->mode_to_id.insert("infection", Mode::INFECTION);
   this->mode_to_id.insert("swat", Mode::SWAT);
-  this->mode_to_id.insert("swords", Mode::SWORDS);
+
+    this->loadout_to_id.insert("standard",LoadOut::STANDARD);
+    this->loadout_to_id.insert("standard",LoadOut::HARDCORE);
+    this->loadout_to_id.insert("standard",LoadOut::FIESTA);
+    this->loadout_to_id.insert("standard",LoadOut::SMALLARMS);
+    this->loadout_to_id.insert("standard",LoadOut::SNIPERS);
+    this->loadout_to_id.insert("standard",LoadOut::HOTNHEAVY);
+    this->loadout_to_id.insert("standard",LoadOut::SWORDS);
+    this->loadout_to_id.insert("standard",LoadOut::SHOTTYSNIPERS);
+    this->loadout_to_id.insert("standard",LoadOut::SLICENDICE);
+    this->loadout_to_id.insert("standard",LoadOut::UNSC);
+    this->loadout_to_id.insert("standard",LoadOut::COVENANT);
+    this->loadout_to_id.insert("standard",LoadOut::BRUTE);
 }
 
 /* Read and process the response from {@link getConfig()} */
@@ -61,13 +83,15 @@ void NetworkAPI::readGetConfig(QNetworkReply *reply)
     // Perform basic validation to confirm the object is the expected model
     QString map_str = server.value("map").toString().toLower();
     QString mode_str = server.value("mode").toString().toLower();
-    if(map_to_id.contains(map_str) && mode_to_id.contains(mode_str))
+    QString loadout_str = server.value("loadout").toString().toLower();
+    if(map_to_id.contains(map_str) && mode_to_id.contains(mode_str) && loadout_to_id.contains(loadout_str))
     {
       servers.append(RemoteServer::Builder()
                      .setAddress(server.value("address").toString())
                      ->setId(server.value("id").toString())
                      ->setMapId(map_to_id.value(map_str))
                      ->setModeId(mode_to_id.value(mode_str))
+                     ->setLoadOutId(loadout_to_id.value(loadout_str))
                      ->setName(server.value("name").toString())
                      ->setPort(server.value("port").toString())
                      ->build());

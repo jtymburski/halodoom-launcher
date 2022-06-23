@@ -31,6 +31,9 @@ private:
   /* Mode identifier currently running on the server */
   Mode mode_id;
 
+  /* Loadout identifier currently running on the server */
+  LoadOut loadout_id;
+
   /* Readable name for the active server */
   QString name;
 
@@ -50,6 +53,9 @@ public:
   /* Returns the mode identifier currently running on the server */
   Mode getModeId() const;
 
+  /* Returns the loadout identifier currently running on the server */
+  LoadOut getLoadOutId() const;
+
   /* Returns the readable name for the active server */
   QString getName() const;
 
@@ -64,6 +70,7 @@ public:
     QString id;
     Map map_id;
     Mode mode_id;
+    LoadOut loadout_id;
     QString name;
     QString port;
 
@@ -73,6 +80,7 @@ public:
     Builder* setId(QString id);
     Builder* setMapId(Map map_id);
     Builder* setModeId(Mode mode_id);
+    Builder* setLoadOutId(LoadOut loadout_id);
     Builder* setName(QString name);
     Builder* setPort(QString port);
   };

@@ -15,7 +15,7 @@ class Slider : public QSlider
 
 public:
   /* Constructor */
-  Slider(int value, int minValue, int maxValue, QWidget *parent = nullptr);
+  Slider(int value, int minValue, int maxValue, int height = 50, QWidget *parent = nullptr);
 };
 
 #endif // SLIDER_H

@@ -6,7 +6,6 @@
  * custom overlays.
  */
 #include "ui/view/mainview.h"
-
 /**
  * Constructor, with just the parent.
  * @param parent top level owning widget, for garbage collection
@@ -21,10 +20,10 @@ MainView::MainView(QWidget *parent) : QWidget(parent)
   // Animated background
   AnimatedBackground* background = new AnimatedBackground(this);
   background->addBackground(":/image/background/main1.jpg");
-  background->addBackground(":/image/background/main2.jpg");
+  background->addBackground(":/image/background/main5.jpg");
   background->addBackground(":/image/background/main3.jpg");
   background->addBackground(":/image/background/main4.jpg");
-  background->addBackground(":/image/background/main5.jpg");
+  background->addBackground(":/image/background/main2.jpg");
   background->addOverlay(":/image/halodoom.png");
   layout->addWidget(background, 0, 0, -1, -1);
 
@@ -33,13 +32,13 @@ MainView::MainView(QWidget *parent) : QWidget(parent)
   button_layout->setContentsMargins(175, 150, 150, 150);
   button_layout->setSpacing(15);
 
-  MenuButton* multiplayer_button = new MenuButton("Multiplayer", BUTTON_FONT_SIZE_PX, this);
-  connect(multiplayer_button, SIGNAL(clicked()), this, SIGNAL(selectMultiplayer()));
-  button_layout->addWidget(multiplayer_button);
-
-  MenuButton* offline_button = new MenuButton("Offline Skirmish", BUTTON_FONT_SIZE_PX, this);
+  MenuButton* offline_button = new MenuButton("Launch Halodoom", BUTTON_FONT_SIZE_PX, this);
   connect(offline_button, SIGNAL(clicked()), this, SIGNAL(selectOfflineSkirmish()));
   button_layout->addWidget(offline_button);
+
+  MenuButton* multiplayer_button = new MenuButton("Play Online", BUTTON_FONT_SIZE_PX, this);
+  connect(multiplayer_button, SIGNAL(clicked()), this, SIGNAL(selectMultiplayer()));
+  button_layout->addWidget(multiplayer_button);
 
   MenuButton* exit_button = new MenuButton("Exit", BUTTON_FONT_SIZE_PX, this);
   connect(exit_button, SIGNAL(clicked()), this, SIGNAL(selectExit()));

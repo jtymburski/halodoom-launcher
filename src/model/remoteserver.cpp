@@ -29,6 +29,11 @@ Mode RemoteServer::getModeId() const
   return mode_id;
 }
 
+/* Returns the loadout identifier currently running on the server */
+LoadOut RemoteServer::getLoadOutId() const
+{
+  return loadout_id;
+}
 /* Returns the readable name for the active server */
 QString RemoteServer::getName() const
 {
@@ -53,6 +58,7 @@ RemoteServer RemoteServer::Builder::build()
   server.id = this->id;
   server.map_id = this->map_id;
   server.mode_id = this->mode_id;
+  server.loadout_id = this->loadout_id;
   server.name = this->name;
   server.port = this->port;
 
@@ -87,6 +93,12 @@ RemoteServer::Builder* RemoteServer::Builder::setModeId(Mode mode_id)
   return this;
 }
 
+/* Sets the loadout identifier currently running on the server */
+RemoteServer::Builder* RemoteServer::Builder::setLoadOutId(LoadOut loadout_id)
+{
+  this->loadout_id = loadout_id;
+  return this;
+}
 /* Sets the readable name for the active server */
 RemoteServer::Builder* RemoteServer::Builder::setName(QString name)
 {

@@ -13,7 +13,7 @@
  * @param maxValue maximum (right) end of the slider
  * @param parent owning widget
  */
-Slider::Slider(int value, int minValue, int maxValue, QWidget *parent)
+Slider::Slider(int value, int minValue, int maxValue, int height, QWidget *parent)
       : QSlider(Qt::Horizontal, parent)
 {
   setMinimum(minValue);
@@ -23,8 +23,9 @@ Slider::Slider(int value, int minValue, int maxValue, QWidget *parent)
 
   setStyleSheet(
         "QSlider {"
-          "height:50;"
-          "margin:5px 0px"
+          "height:"
+              +QString::number(height) + "px;"
+          "margin:10px 0px"
         "}"
         "QSlider::handle:horizontal {"
           "background-color:rgba(255, 255, 255, 255);"

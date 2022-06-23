@@ -24,6 +24,9 @@ private:
   /* Mode UI properties */
   Selection mode = Selection::Builder().build();
 
+  /* Loadout UI properties */
+  Selection loadout = Selection::Builder().build();
+
   /* Remote server configuration */
   RemoteServer server = RemoteServer::Builder().build();
 
@@ -34,6 +37,9 @@ public:
   /* Returns the mode UI properties */
   Selection getMode() const;
 
+  /* Returns the loadout UI properties */
+  Selection getLoadOut() const;
+
   /* Returns the remote server configuration */
   RemoteServer getServer() const;
 
@@ -43,12 +49,14 @@ public:
   private:
     Selection map = Selection::Builder().build();
     Selection mode = Selection::Builder().build();
+    Selection loadout = Selection::Builder().build();
     RemoteServer server = RemoteServer::Builder().build();
 
   public:
     MultiplayerGame build();
     Builder* setMap(Selection map);
     Builder* setMode(Selection mode);
+    Builder* setLoadOut(Selection loadout);
     Builder* setServer(RemoteServer server);
   };
 };
