@@ -19,11 +19,12 @@ PageHeader::PageHeader(QString main_title, QString back_name, QWidget *parent) :
 
   QLabel* label_title = new QLabel(main_title.toUpper(), this);
   label_title->setAlignment(Qt::AlignCenter);
+
   label_title->setStyleSheet(
         "QLabel {"
           "color:#68c4ff;"
           "font-family:bahnschrift;"
-          "font-size:100px;"
+          "font-size:75px;"
           "QFont::bold"
         "}");
   layout->addWidget(label_title, 0, 0, 1, 3);

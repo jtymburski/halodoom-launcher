@@ -41,9 +41,12 @@ MultiplayerJoinView::MultiplayerJoinView(GameController *controller, QWidget *pa
   TextView *header_mode = new TextView("Mode", QColorConstants::White, 28,
                                         QSize(15, 0), this);
   table_layout->addWidget(header_mode, 0, 2);
+  TextView *header_loadout = new TextView("Loadout", QColorConstants::White, 28,
+                                        QSize(15, 0), this);
+  table_layout->addWidget(header_loadout, 0, 3);
   TextView *header_count = new TextView("Players", QColorConstants::White, 28,
                                         QSize(15, 0), this);
-  table_layout->addWidget(header_count, 0, 3);
+  table_layout->addWidget(header_count, 0, 4);
 
   // Table rows
   for(int row = 1; row < 12; row++)
@@ -119,6 +122,9 @@ void MultiplayerJoinView::updateServerTableView()
           case 2:
             cell->setText(game.getMode().getName());
             break;
+          case 3:
+            cell->setText(game.getLoadOut().getName());
+            break;
           default:
             cell->setText("-");
         }
@@ -171,6 +177,7 @@ void MultiplayerJoinView::updateServers(const QVector<RemoteServer> &servers)
     active_games.append(MultiplayerGame::Builder()
                         .setMap(ui_database.getMap(server.getMapId()))
                         ->setMode(ui_database.getMode(server.getModeId()))
+                        //->setLoadOut(ui_database.getLoadout(server.getLoadOutId()))
                         ->setServer(server)
                         ->build());
   }

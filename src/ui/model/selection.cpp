@@ -41,6 +41,16 @@ int Selection::getType() const
   return type;
 }
 
+
+/**
+ * Returns the loadout identifier, meant to encapsulate a weakly-typed enumerator.
+ * @return loadout
+ */
+int Selection::getLoadOut() const
+{
+    return loadout;
+}
+
 /**
  * Build the {@link GameSelection} object from the configured builder.
  * @return built object
@@ -99,5 +109,17 @@ Selection::Builder* Selection::Builder::setName(QString name)
 Selection::Builder* Selection::Builder::setType(int type)
 {
   this->type = type;
+  return this;
+}
+
+
+/**
+ * Sets the selection loadout. This should be a unique identifier.
+ * @param loadout weakly-typed enumerator
+ * @return reference to the builder, for chaining
+ */
+Selection::Builder* Selection::Builder::setLoadout(int loadout)
+{
+  this->loadout = loadout;
   return this;
 }

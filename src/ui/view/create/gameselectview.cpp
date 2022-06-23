@@ -21,7 +21,7 @@ GameSelectView::GameSelectView(QWidget *parent)
   layout->setColumnStretch(4, 5);
   layout->setColumnStretch(5, 1);
   layout->setColumnStretch(6, 1);
-  layout->setRowStretch(0, 1);
+  //layout->setRowStretch(0, 1);
   layout->setRowStretch(2, 5);
   layout->setRowStretch(5, 2);
 
@@ -29,15 +29,15 @@ GameSelectView::GameSelectView(QWidget *parent)
 
   // UI : Right Column
   label_image = new QLabel(this);
-  layout->addWidget(label_image, 1, 3, 3, 3);
+  layout->addWidget(label_image,1, 3, 3, 3);
 
-  TextView *label_description_header = new TextView("SUMMARY", QColor("#68c4ff"), 24,
+  TextView *label_description_header = new TextView("SUMMARY", QColor("#68c4ff"), 24*(parentWidget()->parentWidget()->parentWidget()->width()/1920.0),
                                                     QSize(0, 0), this);
-  layout->addWidget(label_description_header, 4, 4);
+  layout->addWidget(label_description_header, 4, 3);
 
-  label_description = new TextView("Description", QColorConstants::White, 20, QSize(0, 0), this);
+  label_description = new TextView("Description", QColorConstants::White, 25*(parentWidget()->parentWidget()->parentWidget()->width()/1920.0), QSize(0, 0), this);
   label_description->setWordWrap(true);
-  layout->addWidget(label_description, 5, 4, Qt::AlignTop);
+  layout->addWidget(label_description, 5, 3,3,3,Qt::AlignTop);
 }
 
 /* ---- PRIVATE SLOT FUNCTIONS ---- */
@@ -84,13 +84,13 @@ void GameSelectView::createSelections(const QString &title,
   layout_names->addSpacerItem(
         new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding));
 
-  TextView *label_header = new TextView(title, QColor("#68c4ff"), 34, QSize(0, 0), this);
+  TextView *label_header = new TextView(title, QColor("#68c4ff"), 34*(parentWidget()->parentWidget()->parentWidget()->width()/1920.0), QSize(0, 0), this);
   layout_names->addWidget(label_header);
   layout_names->addSpacerItem(new QSpacerItem(0, 20));
 
   for(auto const &selection : qAsConst(this->selections))
   {
-    MenuButton *button_choice = new MenuButton(selection.getName(), 30);
+    MenuButton *button_choice = new MenuButton(selection.getName(), 32*(parentWidget()->parentWidget()->parentWidget()->width()/1920.0));
     connect(button_choice, &MenuButton::clicked, this, [=]() { this->setSelection(selection); });
     connect(button_choice, &MenuButton::hovered, this, [=]() { this->viewSelection(selection); });
     layout_names->addWidget(button_choice);

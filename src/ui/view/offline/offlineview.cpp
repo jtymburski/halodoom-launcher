@@ -23,7 +23,7 @@ OfflineView::OfflineView(GameController *controller, QWidget *parent) : QWidget(
   layout->addWidget(background, 0, 0, -1, -1);
 
   // Page header
-  PageHeader *header = new PageHeader("Offline Skirmish", "Main Menu", this);
+  PageHeader *header = new PageHeader("Offline Multiplayer", "Back", this);
   connect(header, SIGNAL(backClicked()), this, SLOT(backToPreviousView()));
   layout->addWidget(header, 0, 0);
 

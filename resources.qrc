@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="image">
+    <qresource prefix="/image">
         <file alias="background/dither.png">resource/image/background/dither_fresnel.png</file>
         <file alias="background/main1.jpg">resource/image/background/main1.jpg</file>
         <file alias="background/main2.jpg">resource/image/background/main2.jpg</file>
@@ -8,33 +8,59 @@
         <file alias="background/main5.jpg">resource/image/background/main5.jpg</file>
         <file alias="background/multi1.jpg">resource/image/background/multi1.jpg</file>
         <file alias="background/offline1.jpg">resource/image/background/offline1.jpg</file>
-
         <file alias="halodoom.png">resource/image/halodoom.png</file>
-
         <file alias="map/floodgulch.jpg">resource/image/map/floodgulch.jpg</file>
         <file alias="map/ghostship.jpg">resource/image/map/ghostship.jpg</file>
         <file alias="map/rebellion.jpg">resource/image/map/rebellion.jpg</file>
         <file alias="map/submerged.jpg">resource/image/map/submerged.jpg</file>
         <file alias="map/warehouse.jpg">resource/image/map/warehouse.jpg</file>
-
-        <file alias="mode/fiesta.jpg">resource/image/mode/fiesta.jpg</file>
         <file alias="mode/slayer.jpg">resource/image/mode/slayer.jpg</file>
-        <file alias="mode/snipers.jpg">resource/image/mode/snipers.jpg</file>
         <file alias="mode/swat.jpg">resource/image/mode/swat.jpg</file>
-        <file alias="mode/swords.jpg">resource/image/mode/swords.jpg</file>
-
         <file alias="multiplayer/create.jpg">resource/image/multiplayer/create.jpg</file>
         <file alias="multiplayer/create-hover.jpg">resource/image/multiplayer/create_hover.jpg</file>
         <file alias="multiplayer/join.jpg">resource/image/multiplayer/join.jpg</file>
         <file alias="multiplayer/join-hover.jpg">resource/image/multiplayer/join_hover.jpg</file>
-
+        <file alias="player/ascendant.jpg">resource/image/player/ascendant.jpg</file>
+        <file alias="player/boopster.jpg">resource/image/player/boopster.jpg</file>
+        <file alias="player/filch.jpg">resource/image/player/filch.jpg</file>
+        <file alias="player/glumpy.jpg">resource/image/player/glumpy.jpg</file>
+        <file alias="player/goldrunner.jpg">resource/image/player/goldrunner.jpg</file>
+        <file alias="player/john.jpg">resource/image/player/john.jpg</file>
+        <file alias="player/oceanman.jpg">resource/image/player/oceanman.jpg</file>
+        <file alias="player/pinkleton.jpg">resource/image/player/pinkleton.jpg</file>
+        <file alias="player/scluggs.jpg">resource/image/player/scluggs.jpg</file>
+        <file alias="player/wasp.jpg">resource/image/player/wasp.jpg</file>
         <file alias="player/avalon.jpg">resource/image/player/avalon.jpg</file>
         <file alias="player/nexiam.jpg">resource/image/player/nexiam.jpg</file>
         <file alias="player/ramsus.jpg">resource/image/player/ramsus.jpg</file>
         <file alias="player/uzziel.jpg">resource/image/player/uzziel.jpg</file>
         <file alias="player/zetsui.jpg">resource/image/player/zetsui.jpg</file>
+        <file alias="map/infinity.jpg">resource/image/map/infinity.jpg</file>
+        <file alias="map/liminal.jpg">resource/image/map/liminal.jpg</file>
+        <file alias="map/lockup.jpg">resource/image/map/lockup.jpg</file>
+        <file alias="map/schism.jpg">resource/image/map/schism.jpg</file>
+        <file alias="map/terminus.jpg">resource/image/map/terminus.jpg</file>
+        <file alias="map/threshold.jpg">resource/image/map/threshold.jpg</file>
+        <file alias="map/trigate.jpg">resource/image/map/trigate.jpg</file>
+        <file alias="map/verdant.jpg">resource/image/map/verdant.jpg</file>
+        <file alias="loadout/hardcore.jpg">resource/image/loadout/hardcore.jpg</file>
+        <file alias="loadout/heavy.jpg">resource/image/loadout/heavy.jpg</file>
+        <file alias="loadout/smallarms.jpg">resource/image/loadout/smallarms.jpg</file>
+        <file alias="loadout/snipers.jpg">resource/image/loadout/snipers.jpg</file>
+        <file alias="loadout/ss.jpg">resource/image/loadout/ss.jpg</file>
+        <file alias="loadout/standard.jpg">resource/image/loadout/standard.jpg</file>
+        <file alias="loadout/swords.jpg">resource/image/loadout/swords.jpg</file>
+        <file alias="loadout/brute.jpg">resource/image/loadout/brute.jpg</file>
+        <file alias="loadout/covenant.jpg">resource/image/loadout/covenant.jpg</file>
+        <file alias="loadout/fiesta.jpg">resource/image/loadout/fiesta.jpg</file>
+        <file alias="loadout/slice.jpg">resource/image/loadout/slice.jpg</file>
+        <file alias="loadout/unsc.jpg">resource/image/loadout/unsc.jpg</file>
+        <file alias="mode/infection.jpg">resource/image/mode/infection.jpg</file>
+        <file alias="mode/juggernaut.jpg">resource/image/mode/juggernaut.jpg</file>
+        <file alias="mode/koth.jpg">resource/image/mode/koth.jpg</file>
+        <file alias="mode/oddball.jpg">resource/image/mode/oddball.jpg</file>
     </qresource>
-    <qresource prefix="font">
+    <qresource prefix="/font">
         <file alias="bahnschrift.ttf">resource/font/bahnschrift.ttf</file>
     </qresource>
 </RCC>

@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
   QFontDatabase::addApplicationFont(":/font/bahnschrift.ttf");
 
   MainDialog dialog;
+  //dialog.setFixedSize(1280,720);
   dialog.show();
 
   return app.exec();

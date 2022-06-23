@@ -23,8 +23,13 @@ GameCreateView::GameCreateView(GameController *controller, QWidget *parent) : QW
   view_layout->addWidget(view_map);
 
   view_mode = new GameModeView(this);
-  connect(view_mode, &GameMapView::selected, this, &GameCreateView::viewOptions);
+  connect(view_mode, &GameModeView::selected, this, &GameCreateView::viewLoadout);
   view_layout->addWidget(view_mode);
+
+
+  view_loadout = new GameLoadOutView(this);
+  connect(view_loadout, &GameLoadOutView::selected, this, &GameCreateView::viewOptions);
+  view_layout->addWidget(view_loadout);
 
   view_options = new GameOptionsView(this);
   connect(view_options, &GameOptionsView::configured, this, &GameCreateView::create);
@@ -42,15 +47,16 @@ void GameCreateView::create()
 {
   const Selection map = view_map->getSelection();
   const Selection mode = view_mode->getSelection();
+  const Selection loadout = view_loadout->getSelection();
 
   const QVector<Selection> bots = view_options->getBots();
   QVector<Bot> bot_types;
   for(int bot_index = 0; bot_index < bots.size(); bot_index++)
     bot_types.append((Bot) bots.at(bot_index).getType());
 
-  controller->startServerAndClient((Map) map.getType(), (Mode) mode.getType(), bot_types,
+  controller->startServerAndClient((Map) map.getType(), (Mode) mode.getType(),  (LoadOut) loadout.getType(), bot_types,
                                    view_options->getPlayerCount(), view_options->getScoreLimit(),
-                                   view_options->getTimeLimit());
+                                   view_options->getTimeLimit(), view_options->getTimeScoreLimit(), view_options->getTeamGame());
 }
 
 /**
@@ -70,6 +76,13 @@ void GameCreateView::viewMode()
 }
 
 /**
+ * View the select game loadout flow.
+ */
+void GameCreateView::viewLoadout()
+{
+  view_layout->setCurrentWidget(view_loadout);
+}
+/**
  * View the select game options flow.
  */
 void GameCreateView::viewOptions()
@@ -88,12 +101,17 @@ bool GameCreateView::backToPreviousView()
 {
   if (view_layout->currentWidget() == view_options)
   {
-    viewMode();
+    viewLoadout();
     return true;
   }
   else if (view_layout->currentWidget() == view_mode)
   {
     viewMap();
+    return true;
+  }
+  else if (view_layout->currentWidget() == view_loadout)
+  {
+    viewMode();
     return true;
   }
   else if (view_layout->currentWidget() == view_map)

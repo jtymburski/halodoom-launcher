@@ -14,6 +14,7 @@
 #include "game/gamecontroller.h"
 #include "ui/view/create/gamemapview.h"
 #include "ui/view/create/gamemodeview.h"
+#include "ui/view/create/gameloadoutview.h"
 #include "ui/view/create/gameoptionsview.h"
 
 class GameCreateView : public QWidget
@@ -37,6 +38,9 @@ private:
   /* Select game mode view */
   GameModeView *view_mode;
 
+  /* Select game loadout view */
+  GameLoadOutView *view_loadout;
+
   /* Select game options view */
   GameOptionsView *view_options;
 
@@ -49,6 +53,9 @@ private slots:
 
   /* View the select game mode flow */
   void viewMode();
+
+  /* View the select game loadout flow */
+  void viewLoadout();
 
   /* View the select game options flow */
   void viewOptions();

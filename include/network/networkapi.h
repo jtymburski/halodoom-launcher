@@ -14,6 +14,7 @@
 #include <QNetworkReply>
 #include <QObject>
 #include <QVector>
+#include <QDebug>
 
 #include "model/gametypes.h"
 #include "model/remoteasset.h"
@@ -34,6 +35,7 @@ private:
   /* Game type translation maps */
   QMap<QString, Map> map_to_id;
   QMap<QString, Mode> mode_to_id;
+  QMap<QString, LoadOut> loadout_to_id;
 
   /* Path and URL properties */
   const static QString API_GET_CONFIG_PATH;

@@ -23,7 +23,7 @@ MultiplayerView::MultiplayerView(GameController *controller, QWidget *parent) : 
   layout->addWidget(background, 0, 0, -1, -1);
 
   // Page header
-  PageHeader* header = new PageHeader("Multiplayer", "Main Menu", this);
+  PageHeader* header = new PageHeader("Online Multiplayer", "Back", this);
   connect(header, SIGNAL(backClicked()), this, SLOT(backToPreviousView()));
   layout->addWidget(header, 0, 0);
 

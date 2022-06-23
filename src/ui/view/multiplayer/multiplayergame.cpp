@@ -17,6 +17,11 @@ Selection MultiplayerGame::getMode() const
   return mode;
 }
 
+/* Returns the mode UI properties */
+Selection MultiplayerGame::getLoadOut() const
+{
+  return loadout;
+}
 /* Returns the remote server configuration */
 RemoteServer MultiplayerGame::getServer() const
 {
@@ -33,6 +38,7 @@ MultiplayerGame MultiplayerGame::Builder::build()
 
   game.map = this->map;
   game.mode = this->mode;
+  game.loadout = this->loadout;
   game.server = this->server;
 
   return game;
@@ -52,6 +58,12 @@ MultiplayerGame::Builder* MultiplayerGame::Builder::setMode(Selection mode)
   return this;
 }
 
+/* Sets the loadout UI properties */
+MultiplayerGame::Builder* MultiplayerGame::Builder::setLoadOut(Selection loadout)
+{
+  this->loadout = loadout;
+  return this;
+}
 /* Sets the remote server configuration */
 MultiplayerGame::Builder* MultiplayerGame::Builder::setServer(RemoteServer server)
 {

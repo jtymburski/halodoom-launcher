@@ -55,20 +55,20 @@ public:
   /* Explicitly instructs the controller to load the config into memory */
   void loadConfig(bool reload = false);
 
-  /* Execute and start the game, in normal start-up mode */
-  void start();
-
   /* Execute and start a multiplayer client */
   void startClient(QString address);
   void startClient(QString address, QString port);
 
   /* Execute and start a local multiplayer server */
   void startServer();
+  /* Execute and start the game, in normal start-up mode */
+  void start();
 
   /* Execute and start a local multiplayer server and a client connected to that server */
-  void startServerAndClient(const Map &map, const Mode &mode, const QVector<Bot> &bots,
+  void startServerAndClient(const Map &map, const Mode &mode, const LoadOut &loadout, const QVector<Bot> &bots,
                             const int max_player_count = 8, const int score_limit = 0,
-                            const int time_limit = 0);
+                            const int time_limit = 0, const int time_score_limit = 0,
+                            const int teamgame = 2);
 
   /* Stop a running local multiplayer server, if it exists */
   void stopServer();

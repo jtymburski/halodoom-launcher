@@ -23,7 +23,8 @@ SOURCES += \
     src/ui/model/selection.cpp \
     src/ui/view/create/gamecreateview.cpp \
     src/ui/view/create/gamemapview.cpp \
-    src/ui/view/create/gamemodeview.cpp \
+    src/ui/view/create/gamemodesview.cpp \
+    src/ui/view/create/gameloadoutview.cpp \
     src/ui/view/create/gameoptionsview.cpp \
     src/ui/view/create/gameselectview.cpp \
     src/ui/view/mainview.cpp \
@@ -59,6 +60,7 @@ HEADERS += \
     include/ui/view/create/gamecreateview.h \
     include/ui/view/create/gamemapview.h \
     include/ui/view/create/gamemodeview.h \
+    include/ui/view/create/gameloadoutview.h \
     include/ui/view/create/gameoptionsview.h \
     include/ui/view/create/gameselectview.h \
     include/ui/view/mainview.h \

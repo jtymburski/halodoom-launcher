@@ -21,6 +21,7 @@ MainDialog::MainDialog(QWidget *parent)
   else
     setFixedSize(RESOLUTION_SMALL);
 
+
   view_layout = new QStackedLayout(this);
 
   view_main = new MainView(this);
@@ -67,5 +68,6 @@ void MainDialog::viewMultiplayer()
  */
 void MainDialog::viewOfflineSkirmish()
 {
-  view_layout->setCurrentWidget(view_offline);
+    game_controller.start();
+  //view_layout->setCurrentWidget(view_offline);
 }

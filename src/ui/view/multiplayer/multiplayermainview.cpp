@@ -24,7 +24,7 @@ MultiplayerMainView::MultiplayerMainView(QWidget *parent) : QWidget(parent)
   layout->setRowStretch(2, 1);
 
   // Create new multiplayer game option
-  ImageButton *create_button = new ImageButton("Create New Game",
+  ImageButton *create_button = new ImageButton("Create New Server",
                                                ":/image/multiplayer/create.jpg",
                                                ":/image/multiplayer/create-hover.jpg",
                                                this);
@@ -32,7 +32,7 @@ MultiplayerMainView::MultiplayerMainView(QWidget *parent) : QWidget(parent)
   layout->addWidget(create_button, 1, 1);
 
   // Join existing multiplayer game option
-  ImageButton *join_button = new ImageButton("Search For Game",
+  ImageButton *join_button = new ImageButton("Browse Servers",
                                              ":/image/multiplayer/join.jpg",
                                              ":/image/multiplayer/join-hover.jpg",
                                              this);

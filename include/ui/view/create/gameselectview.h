@@ -13,6 +13,9 @@
 #include <QVBoxLayout>
 #include <QVector>
 #include <QWidget>
+#include <QApplication>
+#include <QScreen>
+#include <QGuiApplication>
 
 #include "ui/model/selection.h"
 #include "ui/widget/menubutton.h"

@@ -54,7 +54,6 @@ void GameController::startGameProcess(const QList<Argument> &arguments)
 void GameController::startServerProcess(const QList<Argument> &arguments)
 {
   QStringList argument_string_list = argument_translator.toStringList(arguments);
-
   stopServer();
   server_process = new QProcess();
   server_process->start(launch_config->getZandronumBinaryFilepath(), argument_string_list);
@@ -146,23 +145,51 @@ void GameController::startServer()
  * Execute and start a local multiplayer server and a client connected to that server.
  * @throws std::invalid_parameter if the launch config is misconfigured
  */
-void GameController::startServerAndClient(const Map &map, const Mode &mode,
+void GameController::startServerAndClient(const Map &map, const Mode &mode, const LoadOut &loadout,
                                           const QVector<Bot> &bots, const int max_player_count,
-                                          const int score_limit, const int time_limit)
+                                          const int score_limit, const int time_limit,
+                                          const int time_score_limit, const int teamgame)
 {
   loadConfig();
 
   // Configure and launch the server
   launch_config->insertServerArgument(argument_translator.map(map));
-  launch_config->insertServerArgument(argument_translator.mode(mode));
+  //launch_config->insertServerArgument(argument_translator.mode(mode));
+  //launch_config->insertServerArgument(argument_translator.loadOut(loadout));
   launch_config->insertServerArgument(argument_translator.bots(bots));
 
   launch_config->insertServerArgument(argument_translator.playerCount(max_player_count));
   launch_config->setServerConnectionLimit(max_player_count);
 
-  launch_config->insertServerArgument(argument_translator.scoreLimit(score_limit));
-  launch_config->insertServerArgument(argument_translator.timeLimit(time_limit));
+  //launch_config->insertServerArgument(argument_translator.scoreLimit(score_limit));
+  //launch_config->insertServerArgument(argument_translator.timeLimit(time_limit));
 
+
+  QFile fOut("blah.cfg");
+  if (fOut.open(QFile::WriteOnly | QFile::Text))
+  {
+    QTextStream s(&fOut);
+    s << argument_translator.loadOut(loadout).getKey();
+    s << argument_translator.loadOut(loadout).getValues().first();
+    s << '\n';
+    s << argument_translator.mode(mode).getKey();
+    s << argument_translator.mode(mode).getValues().first();
+    s << '\n';
+    s << argument_translator.scoreLimit(score_limit).getKey();
+    s << argument_translator.scoreLimit(score_limit).getValues().first();
+    s << '\n';
+    s << argument_translator.timeLimit(time_limit).getKey();
+    s << argument_translator.timeLimit(time_limit).getValues().first();
+    s << '\n';
+    s << argument_translator.timeScoreLimit(time_score_limit).getKey();
+    s << argument_translator.timeScoreLimit(time_score_limit).getValues().first();
+    s << '\n';
+    s << argument_translator.teamGame(teamgame).getKey();
+    s << '\n';
+    s << argument_translator.teamGame(teamgame).getValues().first();
+    s << '\n';
+  }
+ // launch_config->insertServerArgument(Argument("+exec "," blah.cfg "));
   startServerProcess(launch_config->getServerArguments());
 
   // Configure and launch the client
